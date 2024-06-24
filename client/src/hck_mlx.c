@@ -169,4 +169,5 @@ void	hck_mlx_init(t_mlx *d)
 	// hck_draw_diag(d);
 	hck_draw_diag_right(d);
 	hck_draw_diag_left(d);
+	hck_put_pawn(d);
 }
