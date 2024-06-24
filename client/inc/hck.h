@@ -6,7 +6,7 @@
 /*   By: nrabarij <nrabarij@student.42antanana>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:54:56 by nrabehar          #+#    #+#             */
-/*   Updated: 2024/06/24 14:55:12 by nrabarij         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:50:37 by nrabarij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_img
 /// [5] bot-left corner
 /// [6] left corner
 /// [7] top-left corner
+/// @todo remove useless comments
 typedef struct s_map
 {
 	t_point			position;

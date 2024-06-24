@@ -6,7 +6,7 @@
 /*   By: nrabarij <nrabarij@student.42antanana>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:41:54 by nrabehar          #+#    #+#             */
-/*   Updated: 2024/06/24 15:48:42 by nrabarij         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:06:39 by nrabarij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,40 @@ void	hck_link_diag_map(t_map **bgn)
 
 	if (!bgn || !(*bgn))
 		return ;
+	tmp1 = (*bgn);
+	while (tmp1)
+	{
+		if ((tmp1->position.x % 2 == 0 && tmp1->position.y % 2 == 0) || (tmp1->position.x % 2 != 0 && tmp1->position.y % 2 != 0))
+		{
+			if (tmp1->nb[0])
+			{
+				if (tmp1->nb[0]->nb[6])
+				{
+					tmp1->nb[7] = tmp1->nb[0]->nb[6];
+					tmp1->nb[7]->nb[3] = tmp1;
+				}
+				if (tmp1->nb[0]->nb[2])
+				{
+					tmp1->nb[1] = tmp1->nb[0]->nb[2];
+					tmp1->nb[1]->nb[5] = tmp1;
+				}
+			}
+			if (tmp1->nb[4])
+			{
+				if (tmp1->nb[4]->nb[6])
+				{
+					tmp1->nb[5] = tmp1->nb[4]->nb[6];
+					tmp1->nb[5]->nb[3] = tmp1;
+				}
+				if (tmp1->nb[4]->nb[2])
+				{
+					tmp1->nb[3] = tmp1->nb[4]->nb[2];
+					tmp1->nb[3]->nb[7] = tmp1;
+				}
+			}
+		}
+		tmp1 = tmp1->nxt;
+	}
 }
 
 void	hck_link_square_map(t_map **bgn)
@@ -146,6 +180,7 @@ void	hck_link_square_map(t_map **bgn)
 	}
 }
 
+/// @todo remove main
 int	main(void)
 {
 	t_map	*map;
@@ -157,6 +192,7 @@ int	main(void)
 	if (!map)
 		exit(1);
 	hck_link_square_map(&map);
+	hck_link_diag_map(&map);
 	hck_print_map(map);
 	hck_clear_point(map);
 }
@@ -208,12 +244,13 @@ int	main(void)
 
 
 
-
+/// @todo remove printer
 void	hck_print_map(t_map *tmp)
 {
 	while (tmp)
 	{
-		printf("Cur: [%p]\t[%3d] [%3d]\tTop: [%p]\t Rgt: [%p]\tDwn: [%p]\tLft: [%p]\n", tmp, tmp->position.x, tmp->position.y, tmp->nb[0], tmp->nb[2], tmp->nb[4], tmp->nb[6]);
+		printf("Cur: [%p]\t[%3d] [%3d]\tTop: [%p]\tRgt: [%p]\tDwn: [%p]\tLft: [%p]\n", tmp, tmp->position.x, tmp->position.y, tmp->nb[0], tmp->nb[2], tmp->nb[4], tmp->nb[6]);
+		printf("Cur: [%p]\t[%3d] [%3d]\tTR: [%p]\tBR: [%p]\tBL: [%p]\tTL: [%p]\n", tmp, tmp->position.x, tmp->position.y, tmp->nb[1], tmp->nb[3], tmp->nb[5], tmp->nb[7]);
 		tmp = tmp->nxt;
 	}
 }
