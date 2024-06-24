@@ -78,8 +78,29 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr)
 
 
 /// @todo remove unused comments;
+// int	main(void)
+// {
+// 	struct sockaddr_in	serv_addr;
+// 	char				buffer[BUFFER_SIZE] = {0};
+// 	fd_set				readfds;
+// 	int					max_sd = 0;
+// 	t_mlx				d;
+
+// 	signal(SIGINT, sigint_handler);
+// 	hck_main_socket_create(&serv_addr);
+// 	hck_mlx_init(&d);
+// 	mlx_loop(d.mlx);
+// 	hck_main_socket_loop(&readfds, buffer, max_sd);
+// 	close(sock);
+// 	return (0);
+// }
+
+/// @todo handle communication between mlx window and fork main_socket
+/// @todo create map and pions
+/// @todo centralize map, reduce screen width to fit two mlx_windows on screen
 int	main(void)
 {
+	pid_t				pid;
 	struct sockaddr_in	serv_addr;
 	char				buffer[BUFFER_SIZE] = {0};
 	fd_set				readfds;
@@ -88,8 +109,14 @@ int	main(void)
 
 	signal(SIGINT, sigint_handler);
 	hck_main_socket_create(&serv_addr);
-	hck_mlx_init(&d);
-	mlx_loop(d.mlx);
+	pid = fork();
+	if (pid == 0)
+	{
+		hck_mlx_init(&d);
+		// mlx_hook();
+		hck_ctrl(&d);
+		mlx_loop(d.mlx);
+	}
 	hck_main_socket_loop(&readfds, buffer, max_sd);
 	close(sock);
 	return (0);

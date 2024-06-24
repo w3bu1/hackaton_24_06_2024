@@ -21,3 +21,23 @@ void	hck_free(t_mlx *d)
 		// free(d);
 	}
 }
+
+int	hck_mlx_key(int keysym, t_mlx *d)
+{
+	if (keysym == 0xff1b)
+		return (hck_free(d), exit(0), 0);
+	return (0);
+}
+
+int	hck_exit(t_mlx *d)
+{
+	hck_free(d);
+	exit(0);
+}
+
+int	hck_ctrl(t_mlx *d)
+{
+	mlx_hook(d->win, 17, 0, &hck_exit, d);
+	mlx_hook(d->win, 2, 1L << 0, &hck_mlx_key, d);
+	return (0);
+}

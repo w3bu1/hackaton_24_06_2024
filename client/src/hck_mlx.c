@@ -18,6 +18,7 @@ void	hck_draw_point_map(t_mlx *d)
 		hck_put_pixel(d, map->position.x, map->position.y, HCK_WHITE);
 		map = map->nxt;
 	}
+	mlx_put_image_to_window(d->mlx, d->win, d->map_img, 0, 0);
 }
 
 void	hck_mlx_init(t_mlx *d)

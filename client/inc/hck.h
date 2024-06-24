@@ -95,5 +95,6 @@ t_map				*hck_create_map(int width, int height);
 void				hck_clear_point(t_map *p);
 void				hck_free(t_mlx *d);
 void				hck_mlx_init(t_mlx *d);
+int					hck_ctrl(t_mlx *d);
 
 #endif

@@ -24,7 +24,7 @@ const server = net.createServer(async (socket) => {
     await action.sendMessage(clients, currentClientId, "exit");
     // await sendMessageToClient(currentClientId, "exit");
     delete clients[currentClientId];
-    clientId = 2;
+    clientId--;
     return;
   }
 
@@ -46,6 +46,7 @@ const server = net.createServer(async (socket) => {
     delete clients[currentClientId];
     console.log(currentClientId);
     id = currentClientId === 1 ? 2 : 1;
+    clientId--;
     console.log(id);
     await action.sendMessage(clients, id, "exit");
     // await sendMessageToClient(id, "exit");
