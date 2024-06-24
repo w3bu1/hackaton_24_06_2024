@@ -55,6 +55,7 @@ void	hck_mlx_init(t_mlx *d)
 	d->map = hck_create_map(9, 5);
 	if (!d->map)
 		return (hck_free(d));
+	init_pawn(d->map);
 	d->mlx = mlx_init();
 	if (!d->mlx)
 		return (perror(HCK_ERROR), hck_free(d));
