@@ -24,43 +24,6 @@ void	hck_draw_point_map(t_mlx *d)
 	mlx_put_image_to_window(d->mlx, d->win, d->map_img, 0, 0);
 }
 
-// void	hck_draw_column_map(t_mlx *d)
-// {
-// 	int		y;
-// 	t_map	*map;
-// 	map = d->map;
-// 	y = 0;
-// 	while (map)
-// 	{
-// 		if (map->nb[4])
-// 		{
-// 			y = map->position.y;
-// 			while (++y < map->nb[4]->position.y)
-// 				hck_put_pixel(d, map->position.x, y, HCK_WHITE);
-// 		}
-// 		map = map->nxt;
-// 	}
-// }
-
-// void	hck_draw_line_map(t_mlx *d)
-// {
-// 	int		x;
-// 	t_map	*map;
-// 	map = d->map;
-// 	x = 0;
-// 	while (map)
-// 	{
-// 		if (map->nb[2])
-// 		{
-// 			x = map->position.x;
-// 			while (++x < map->nb[2]->position.x)
-// 				hck_put_pixel(d, x, map->position.y, HCK_WHITE);
-// 		}
-// 		map = map->nxt;
-// 	}
-// }
-
-
 void	hck_draw_lc_map(t_mlx *d)
 {
 	int		x;
@@ -105,7 +68,5 @@ void	hck_mlx_init(t_mlx *d)
 	if (!d->adr)
 		return (perror(HCK_ERROR), hck_free(d));
 	hck_draw_point_map(d);
-	// hck_draw_column_map(d);
-	// hck_draw_line_map(d);
 	hck_draw_lc_map(d);
 }

@@ -8,13 +8,13 @@
 # include "../mlx/mlx.h"
 
 # ifndef _WIN_SIZE
-#  define WIDTH 1024
+#  define WIDTH 680
 #  define HEIGHT 680
 # endif
 
 # ifndef _HCK_CONST
 #  define HCK_WHITE 0xFFFFFF
-#  define HCK_ZOOM 42
+#  define HCK_ZOOM 72
 #  define PORT 8080
 #  define BUFFER_SIZE 1024
 # endif
@@ -27,6 +27,8 @@
 typedef struct s_point
 {
 	int				x;
+	int				ox;
+	int				oy;
 	int				y;
 }					t_point;
 

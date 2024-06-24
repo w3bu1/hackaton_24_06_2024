@@ -26,6 +26,8 @@ t_map	*hck_create_point(int x_pos, int y_pos, int width, int height)
 		map->nb[5] = NULL;
 		map->nb[6] = NULL;
 		map->nb[7] = NULL;
+		map->position.ox = x_pos;
+		map->position.oy = y_pos;
 		map->position.x = (x_pos - (width / 2)) * HCK_ZOOM;
 		map->position.y = (y_pos - (height / 2)) * HCK_ZOOM;
 		map->nxt = NULL;
@@ -43,7 +45,7 @@ void	hck_link_diag_map(t_map **bgn)
 	tmp1 = (*bgn);
 	while (tmp1)
 	{
-		if ((tmp1->position.x % 2 == 0 && tmp1->position.y % 2 == 0) || (tmp1->position.x % 2 != 0 && tmp1->position.y % 2 != 0))
+		if ((tmp1->position.ox % 2 == 0 && tmp1->position.oy % 2 == 0) || (tmp1->position.ox % 2 != 0 && tmp1->position.oy % 2 != 0))
 		{
 			if (tmp1->nb[0])
 			{
@@ -89,12 +91,12 @@ void	hck_link_square_map(t_map **bgn)
 		if (tmp1->nxt)
 		{
 			tmp2 = tmp1->nxt;
-			if (tmp1->nxt->position.x > tmp1->position.x && tmp1->nxt->position.y == tmp1->position.y && tmp1->nb[2] == NULL)
+			if (tmp1->nxt->position.ox == tmp1->position.ox + 1 && tmp1->nxt->position.oy == tmp1->position.oy && tmp1->nb[2] == NULL)
 			{
 				tmp1->nb[2] = tmp1->nxt;
 				tmp1->nxt->nb[6] = tmp1;
 			}
-			while (tmp2 && tmp2->position.x != tmp1->position.x)
+			while (tmp2 && tmp2->position.ox != tmp1->position.ox)
 				tmp2 = tmp2->nxt;
 			if (tmp2)
 			{
