@@ -90,7 +90,7 @@ void	hck_link_square_map(t_map **bgn)
 		if (tmp1->nxt)
 		{
 			tmp2 = tmp1->nxt;
-			if (tmp1->nxt->position.x == tmp1->position.x + 1 && tmp1->nxt->position.y == tmp1->position.y && tmp1->nb[2] == NULL)
+			if (tmp1->nxt->position.x > tmp1->position.x && tmp1->nxt->position.y == tmp1->position.y && tmp1->nb[2] == NULL)
 			{
 				tmp1->nb[2] = tmp1->nxt;
 				tmp1->nxt->nb[6] = tmp1;
