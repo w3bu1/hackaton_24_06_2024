@@ -26,7 +26,6 @@ t_map	*hck_create_point(int x_pos, int y_pos, int width, int height)
 		map->nb[5] = NULL;
 		map->nb[6] = NULL;
 		map->nb[7] = NULL;
-		map->pion = NULL;
 		map->position.x = (x_pos - (width / 2)) * HCK_ZOOM;
 		map->position.y = (y_pos - (height / 2)) * HCK_ZOOM;
 		map->nxt = NULL;
