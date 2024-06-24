@@ -81,6 +81,7 @@ typedef struct s_mlx
 	int				bpp;
 	int				len;
 	int				end;
+	void			*pawn_img[4];
 	struct s_map	*map;
 }					t_mlx;
 
@@ -92,6 +93,6 @@ void				hck_clear_point(t_map *p);
 void				hck_free(t_mlx *d);
 void				hck_mlx_init(t_mlx *d);
 int					hck_ctrl(t_mlx *d);
-void				init_pawn(t_mlx *d, int w, int h);
+void				init_pawn(t_mlx *d);
 
 #endif
