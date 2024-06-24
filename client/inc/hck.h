@@ -1,11 +1,11 @@
 #ifndef HCK_H
 # define HCK_H
 
+# include "../mlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/socket.h>
 # include <unistd.h>
-# include "../mlx/mlx.h"
 
 # ifndef _WIN_SIZE
 #  define WIDTH 680
@@ -32,15 +32,6 @@ typedef struct s_point
 	int				y;
 }					t_point;
 
-typedef struct s_pawn
-{
-	int				selected;
-	int				status;
-	int				player;
-	t_point			position;
-	t_point			old_position;
-}					t_pawn;
-
 typedef struct s_img
 {
 	void			*img;
@@ -49,6 +40,18 @@ typedef struct s_img
 	int				size_line;
 	int				bpp;
 }					t_img;
+typedef struct s_pawn
+{
+	int				selected;
+	int				status;
+	int				player;
+	t_point			position;
+	t_point			old_position;
+	char			*img_path;
+	char			*slt_pth;
+	void			*img;
+}					t_pawn;
+
 
 /// @brief nb represent the neighbours [8]
 /// [0] top corner
@@ -89,6 +92,6 @@ void				hck_clear_point(t_map *p);
 void				hck_free(t_mlx *d);
 void				hck_mlx_init(t_mlx *d);
 int					hck_ctrl(t_mlx *d);
-void 				init_pawn(t_map *map);
+void				init_pawn(t_mlx *d, int w, int h);
 
 #endif
