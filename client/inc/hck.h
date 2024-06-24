@@ -30,23 +30,14 @@ typedef struct s_point
 	int				y;
 }					t_point;
 
-typedef struct s_pion
+typedef struct s_pawn
 {
 	int				selected;
 	int				status;
 	int				player;
-	int				radius;
 	t_point			position;
 	t_point			old_position;
-	struct s_pion	*r;
-	struct s_pion	*l;
-	struct s_pion	*t;
-	struct s_pion	*b;
-	struct s_pion	*tr;
-	struct s_pion	*tl;
-	struct s_pion	*bl;
-	struct s_pion	*br;
-}					t_pion;
+}					t_pawn;
 
 typedef struct s_img
 {
@@ -69,7 +60,7 @@ typedef struct s_img
 typedef struct s_map
 {
 	t_point			position;
-	t_pion			*pion;
+	t_pawn			pawn;
 	struct s_map	*nb[8];
 	struct s_map	*nxt;
 	struct s_map	*prv;
@@ -96,5 +87,6 @@ void				hck_clear_point(t_map *p);
 void				hck_free(t_mlx *d);
 void				hck_mlx_init(t_mlx *d);
 int					hck_ctrl(t_mlx *d);
+void 				init_pawn(t_map *map);
 
 #endif
