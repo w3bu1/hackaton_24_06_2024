@@ -76,7 +76,6 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr)
 	printf("Connected to server\n");
 }
 
-
 /// @todo remove unused comments;
 // int	main(void)
 // {
@@ -113,7 +112,6 @@ int	main(void)
 	if (pid == 0)
 	{
 		hck_mlx_init(&d);
-		// mlx_hook();
 		hck_ctrl(&d);
 		mlx_loop(d.mlx);
 	}

@@ -50,6 +50,82 @@ void	hck_draw_lc_map(t_mlx *d)
 	}
 }
 
+void	hck_draw_diag_right(t_mlx *d)
+{
+	int		x;
+	int		y;
+	t_map	*map;
+
+	map = d->map;
+	while (map)
+	{
+		if ((map->position.ox % 2 == 0 && map->position.oy %2 == 0) || (map->position.ox % 2 && map->position.oy % 2))
+		{
+			if (map->nb[3])
+			{
+				x = map->position.x + 1;
+				y = map->position.y + 1;
+				while (x < map->nb[3]->position.x && y < map->nb[3]->position.y)
+				{
+					hck_put_pixel(d, x, y, HCK_WHITE);
+					x++;
+					y++;
+				}
+			}
+			// if (map->nb[5])
+			// {
+			// 	x = map->position.x - 1;
+			// 	y = map->position.y + 1;
+			// 	while (x > map->nb[5]->position.x && y < map->nb[5]->position.y)
+			// 	{
+			// 		hck_put_pixel(d, x, y, HCK_WHITE);
+			// 		x--;
+			// 		y++;
+			// 	}
+			// }
+		}
+		map = map->nxt;
+	}
+}
+
+void	hck_draw_diag_left(t_mlx *d)
+{
+	int		x;
+	int		y;
+	t_map	*map;
+
+	map = d->map;
+	while (map)
+	{
+		if ((map->position.ox % 2 == 0 && map->position.oy %2 == 0) || (map->position.ox % 2 && map->position.oy % 2))
+		{
+			// if (map->nb[3])
+			// {
+			// 	x = map->position.x + 1;
+			// 	y = map->position.y + 1;
+			// 	while (x < map->nb[3]->position.x && y < map->nb[3]->position.y)
+			// 	{
+			// 		hck_put_pixel(d, x, y, HCK_WHITE);
+			// 		x++;
+			// 		y++;
+			// 	}
+			// }
+			if (map->nb[5])
+			{
+				x = map->position.x - 1;
+				y = map->position.y + 1;
+				while (x > map->nb[5]->position.x && y < map->nb[5]->position.y)
+				{
+					hck_put_pixel(d, x, y, HCK_WHITE);
+					x--;
+					y++;
+				}
+			}
+		}
+		map = map->nxt;
+	}
+}
+
 void	hck_mlx_init(t_mlx *d)
 {
 	d->map = hck_create_map(9, 5);
@@ -70,4 +146,7 @@ void	hck_mlx_init(t_mlx *d)
 		return (perror(HCK_ERROR), hck_free(d));
 	hck_draw_point_map(d);
 	hck_draw_lc_map(d);
+	// hck_draw_diag(d);
+	hck_draw_diag_right(d);
+	hck_draw_diag_left(d);
 }

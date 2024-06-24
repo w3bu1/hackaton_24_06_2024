@@ -65,7 +65,7 @@ void	hck_link_diag_map(t_map **bgn)
 				if (tmp1->nb[4]->nb[6])
 				{
 					tmp1->nb[5] = tmp1->nb[4]->nb[6];
-					tmp1->nb[5]->nb[3] = tmp1;
+					tmp1->nb[5]->nb[1] = tmp1;
 				}
 				if (tmp1->nb[4]->nb[2])
 				{
@@ -91,10 +91,10 @@ void	hck_link_square_map(t_map **bgn)
 		if (tmp1->nxt)
 		{
 			tmp2 = tmp1->nxt;
-			if (tmp1->nxt->position.ox == tmp1->position.ox + 1 && tmp1->nxt->position.oy == tmp1->position.oy && tmp1->nb[2] == NULL)
+			if (tmp2->position.ox == tmp1->position.ox + 1 && tmp2->position.oy == tmp1->position.oy && tmp1->nb[2] == NULL)
 			{
-				tmp1->nb[2] = tmp1->nxt;
-				tmp1->nxt->nb[6] = tmp1;
+				tmp1->nb[2] = tmp2;
+				tmp2->nb[6] = tmp1;
 			}
 			while (tmp2 && tmp2->position.ox != tmp1->position.ox)
 				tmp2 = tmp2->nxt;
