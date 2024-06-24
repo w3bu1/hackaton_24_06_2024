@@ -11,7 +11,7 @@ void	hck_clear_point(t_map *p)
 	p = NULL;
 }
 
-t_map	*hck_create_point(int x_pos, int y_pos)
+t_map	*hck_create_point(int x_pos, int y_pos, int width, int height)
 {
 	t_map	*map = NULL;
 
@@ -27,8 +27,8 @@ t_map	*hck_create_point(int x_pos, int y_pos)
 		map->nb[6] = NULL;
 		map->nb[7] = NULL;
 		map->pion = NULL;
-		map->position.x = x_pos * HCK_ZOOM;
-		map->position.y = y_pos * HCK_ZOOM;
+		map->position.x = (x_pos - (width / 2)) * HCK_ZOOM;
+		map->position.y = (y_pos - (height / 2)) * HCK_ZOOM;
 		map->nxt = NULL;
 		map->prv = NULL;
 	}
@@ -124,31 +124,6 @@ void	hck_point_add_back(t_map **bgn, t_map *new)
 	(*bgn)->prv = (*bgn)->prv->nxt;
 }
 
-void	hck_center_map(t_map **bgn, int width, int height)
-{
-	int		i;
-	t_map	*tmp;
-
-	i = 0;
-	if (!bgn)
-		return ;
-	tmp = (*bgn);
-	while (i < width)
-	{
-		tmp->position.x = tmp->position.x - (width / 2);
-		i++;
-		tmp = tmp->nxt;
-	}
-	i = 0;
-	tmp = (*bgn);
-	while (i < height)
-	{
-		tmp->position.y = tmp->position.y - (height / 2);
-		i++;
-		tmp = tmp->nxt;
-	}
-}
-
 t_map	*hck_create_map(int width, int height)
 {
 	t_map	*new;
@@ -162,7 +137,7 @@ t_map	*hck_create_map(int width, int height)
 		int	j = 0;
 		while (j < width)
 		{
-			new = hck_create_point(j, i);
+			new = hck_create_point(j, i, width, height);
 			if (!new)
 				hck_clear_point(nxt);
 			hck_point_add_back(&nxt, new);
@@ -174,7 +149,6 @@ t_map	*hck_create_map(int width, int height)
 	{
 		hck_link_square_map(&nxt);
 		hck_link_diag_map(&nxt);
-		hck_center_map(&nxt, width, height);
 	}
 	return (nxt);
 }
