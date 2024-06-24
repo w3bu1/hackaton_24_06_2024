@@ -126,6 +126,26 @@ void	hck_draw_diag_left(t_mlx *d)
 	}
 }
 
+void	hck_put_pawn(t_mlx *d)
+{
+	// void *img;
+	// int h = 42;
+	// int w = 42;
+
+	// printf("creating images....\n");
+	// img = mlx_xpm_file_to_image(d->mlx, "./data/sp2.xpm", &w, &h);
+	// if (!img)
+	// 	return ;
+	// mlx_put_image_to_window(d->mlx, d->win, img, 0 , 0);
+	t_map	*map = d->map;
+	while (map)
+	{
+		if (map->pawn.img)
+			mlx_put_image_to_window(d->mlx, d->win, map->pawn.img, (map->position.x + (WIDTH / 2) - 22), (map->position.y + (HEIGHT / 2) - 22) );
+		map = map->nxt;
+	}
+}
+
 void	hck_mlx_init(t_mlx *d)
 {
 	d->map = hck_create_map(9, 5);
