@@ -2,10 +2,15 @@
 # define HCK_H
 
 # include "../mlx/mlx.h"
+# include <arpa/inet.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <sys/select.h>
 # include <sys/socket.h>
 # include <unistd.h>
+# include <pthread.h>
 
 # ifndef _WIN_SIZE
 #  define WIDTH 680
@@ -52,7 +57,6 @@ typedef struct s_pawn
 	void			*img;
 }					t_pawn;
 
-
 /// @brief nb represent the neighbours [8]
 /// [0] top corner
 /// [1] top-right corner
@@ -76,14 +80,30 @@ typedef struct s_mlx
 	void			*mlx;
 	void			*win;
 	void			*map_img;
-	t_img			*pawn;
+	int			player;
 	char			*adr;
 	int				bpp;
 	int				len;
 	int				end;
+	int				revalidate;
 	void			*pawn_img[4];
 	struct s_map	*map;
 }					t_mlx;
+
+typedef struct s_skt
+{
+	struct sockaddr_in	serv_addr;
+	char	buffer[BUFFER_SIZE];
+	fd_set	readfds;
+	int		max_sd;
+}	t_skt;
+
+typedef struct s_hck
+{
+	t_mlx	d_mlx;
+	t_skt	d_skt;
+}	t_hck;
+
 
 void				hck_error(int code);
 double				ft_max(double n1, double n2);
@@ -94,5 +114,7 @@ void				hck_free(t_mlx *d);
 void				hck_mlx_init(t_mlx *d);
 int					hck_ctrl(t_mlx *d);
 void				init_pawn(t_mlx *d);
+void				ft_select_pawn(t_mlx *d, int x, int y);
+char   * hck_perform_act(t_skt *st,  t_mlx *d, char *msg);
 
 #endif

@@ -35,9 +35,17 @@ int	hck_exit(t_mlx *d)
 	exit(0);
 }
 
+int	hck_mouse(int key, int x, int y, t_mlx *d)
+{
+	if (key == 1)
+		ft_select_pawn(d, x, y);
+	return (0);
+}
+
 int	hck_ctrl(t_mlx *d)
 {
 	mlx_hook(d->win, 17, 0, &hck_exit, d);
 	mlx_hook(d->win, 2, 1L << 0, &hck_mlx_key, d);
+	mlx_mouse_hook(d->win, &hck_mouse, d);
 	return (0);
 }

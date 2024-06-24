@@ -8,8 +8,8 @@ async function sendMessage(clients, clientId, message) {
 }
 
 async function playRequest(clients) {
-  await sendMessage(clients, 1, "play\n");
-  await sendMessage(clients, 2, "play\n");
+  await sendMessage(clients, 1, "play 1\n");
+  await sendMessage(clients, 2, "play 2\n");
 }
 
 async function getClientCount(clients) {
