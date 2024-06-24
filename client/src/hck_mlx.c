@@ -141,7 +141,7 @@ void	hck_put_pawn(t_mlx *d)
 	while (map)
 	{
 		if (map->pawn.img)
-			mlx_put_image_to_window(d->mlx, d->win, map->pawn.img, (map->position.x + (WIDTH / 2) - 22), (map->position.y + (HEIGHT / 2) - 22) );
+			mlx_put_image_to_window(d->mlx, d->win, map->pawn.img, (map->position.x + (WIDTH / 2) - 18), (map->position.y + (HEIGHT / 2) - 18) );
 		map = map->nxt;
 	}
 }
@@ -154,7 +154,7 @@ void	hck_mlx_init(t_mlx *d)
 	d->mlx = mlx_init();
 	if (!d->mlx)
 		return (perror(HCK_ERROR), hck_free(d));
-	init_pawn(d, 42, 42);
+	init_pawn(d, 36, 36);
 	d->win = mlx_new_window(d->mlx, WIDTH, HEIGHT, "fanorona");
 	if (!d->win)
 		return (perror(HCK_ERROR), hck_free(d));

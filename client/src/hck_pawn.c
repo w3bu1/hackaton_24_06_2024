@@ -19,12 +19,12 @@ void	init_pawn(t_mlx *d, int w, int h)
 				&& ((map->position.ox % 2 == 0 && map->position.ox < (9 / 2))
 					|| (map->position.ox % 2 == 1 && map->position.ox > (9
 							/ 2)))))
-			map->pawn.player = 1;
+			map->pawn.player = 2;
 		else if (map->position.oy > (5 / 2) || (map->position.oy == (5 / 2)
 				&& ((map->position.ox % 2 == 1 && map->position.ox < (9 / 2))
 					|| (map->position.ox % 2 == 0 && map->position.ox > (9
 							/ 2)))))
-			map->pawn.player = 2;
+			map->pawn.player = 1;
 		else
 			map->pawn.player = 0;
     if (map->pawn.player == 1)
