@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   hck_map.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nrabarij <nrabarij@student.42antanana>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 13:41:54 by nrabehar          #+#    #+#             */
-/*   Updated: 2024/06/24 16:10:27 by nrabarij         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../inc/hck.h"
 
-void	hck_print_map(t_map *tmp);
+// void	hck_print_map(t_map *tmp);
 
 void	hck_clear_point(t_map *p)
 {
@@ -39,8 +27,8 @@ t_map	*hck_create_point(int x_pos, int y_pos)
 		map->nb[6] = NULL;
 		map->nb[7] = NULL;
 		map->pion = NULL;
-		map->position.x = x_pos;
-		map->position.y = y_pos;
+		map->position.x = x_pos * HCK_ZOOM;
+		map->position.y = y_pos * HCK_ZOOM;
 		map->nxt = NULL;
 		map->prv = NULL;
 	}
@@ -87,26 +75,6 @@ t_map	*hck_create_map(int width, int height)
 	}
 	return (nxt);
 }
-
-/*void	fdf_link(t_fdf *d, t_point *p)
-{
-	t_point	*tmp;
-
-	if (!p)
-		return ;
-	fdf_origin(d, p);
-	while (p)
-	{
-		tmp = p->nxt;
-		if (!(p->rgt) && tmp && tmp->x > p->x && tmp->y == p->y)
-			p->rgt = tmp;
-		while (tmp && tmp->x != p->x)
-			tmp = tmp->nxt;
-		if (!(p->dwn) && tmp && tmp->x == p->x && tmp->y > p->y)
-			p->dwn = tmp;
-		p = p->nxt;
-	}
-}*/
 
 void	hck_link_diag_map(t_map **bgn)
 {

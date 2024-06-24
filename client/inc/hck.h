@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   hck.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nrabarij <nrabarij@student.42antanana>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/24 13:54:56 by nrabehar          #+#    #+#             */
-/*   Updated: 2024/06/24 15:50:37 by nrabarij         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef HCK_H
 # define HCK_H
 
@@ -17,10 +5,22 @@
 # include <stdlib.h>
 # include <sys/socket.h>
 # include <unistd.h>
+# include "../mlx/mlx.h"
 
 # ifndef _WIN_SIZE
 #  define WIDTH 1024
-#  define HEIGHT 800
+#  define HEIGHT 680
+# endif
+
+# ifndef _HCK_CONST
+#  define HCK_WHITE 0xFFFFFF
+#  define HCK_ZOOM 42
+#  define PORT 8080
+#  define BUFFER_SIZE 1024
+# endif
+
+# ifndef _HCK_MSG
+#  define HCK_ERROR "\e[31mError\e[0m"
 # endif
 
 // Structure Point pour les coordonnées x et y
@@ -66,31 +66,34 @@ typedef struct s_img
 /// [5] bot-left corner
 /// [6] left corner
 /// [7] top-left corner
-/// @todo remove useless comments
 typedef struct s_map
 {
 	t_point			position;
 	t_pion			*pion;
-	// struct s_map	*r;
-	// struct s_map	*l;
-	// struct s_map	*t;
-	// struct s_map	*b;
-	// struct s_map	*tr;
-	// struct s_map	*tl;
-	// struct s_map	*bl;
-	// struct s_map	*br;
 	struct s_map	*nb[8];
 	struct s_map	*nxt;
 	struct s_map	*prv;
 }					t_map;
 
-typedef struct s_hck
+typedef struct s_mlx
 {
-	t_img			*img_data;
-}					t_hck;
+	void			*mlx;
+	void			*win;
+	void			*map_img;
+	t_img			*pawn;
+	char			*adr;
+	int				bpp;
+	int				len;
+	int				end;
+	struct s_map	*map;
+}					t_mlx;
 
 void				hck_error(int code);
 double				ft_max(double n1, double n2);
 double				ft_abs(double x1);
+t_map				*hck_create_map(int width, int height);
+void				hck_clear_point(t_map *p);
+void				hck_free(t_mlx *d);
+void				hck_mlx_init(t_mlx *d);
 
 #endif
