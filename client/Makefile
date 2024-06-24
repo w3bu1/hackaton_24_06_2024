@@ -1,49 +1,38 @@
-NAME	=	fanorona
+# directories
+MLX_DIR   = mlx
+OBJS_DIR  = obj
+SRCS_DIR  = src
+INCS_DIR  = inc
 
-BIN		=	libhck.a
+# build
+NAME = fanorona
 
-CC		=	cc
+# files
+SRCS_FILES = main.c
 
-RM		=	rm -rf
+# objects
+OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
-CFLAG	=	-Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+CLINKS = -L./$(MLX_DIR) -lmlx -lX11 -lXext -lm  -I $(INCS_DIR)
 
-DIRSRC	=	./src
+$(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@ $(CLINKS)
 
-SRC		=	hck_error.c
+$(NAME) : $(OBJS) 
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(CLINKS)
 
-SRCS	=	$(addprefix $(DIRSRC)/, $(SRC))
+all : $(NAME)
 
-OBJS	=	$(SRCS:%.c=%.o)
+clean :
+	@rm -f $(OBJS)
+	@rm -rf $(OBJS_DIR)
 
-%.o		:	%.c
-			$(CC) $(CFLAG) -c $< -o $@
+fclean : clean
+	@rm -f $(NAME)
 
-LINK	=	-L./ -lhck
+re : fclean all
 
-MAIN	=	$(DIRSRC)/main.c\
-
-$(NAME)	:	$(SRCS) $(BIN)
-			$(CC) $(CFLAG) $(MAIN) $(LINK) -o $(NAME)
-
-$(BIN)	:	$(OBJS)
-			ar rcs $(BIN) $(OBJS)
-
-all		:	$(NAME)
-
-serve :
-			node ./server/index.js
-
-run   :
-			./client/${NAME}
-
-clean	:
-			$(RM) $(OBJS)
-
-fclean	:	clean
-			$(RM) $(BIN)
-			$(RM) $(NAME)
-
-re		:
-
-.PHONY	:	all clean fclean re
+.PHONY : re fclean clean all
