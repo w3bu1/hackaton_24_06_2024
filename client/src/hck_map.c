@@ -35,47 +35,6 @@ t_map	*hck_create_point(int x_pos, int y_pos)
 	return (map);
 }
 
-void	hck_point_add_back(t_map **bgn, t_map *new)
-{
-	if (!new)
-		return ;
-	if (!(*bgn))
-	{
-		(*bgn) = new;
-		(*bgn)->prv = (*bgn);
-		(*bgn)->nxt = NULL;
-		return ;
-	}
-	(*bgn)->prv->nxt = new;
-	(*bgn)->prv->nxt->prv = (*bgn)->prv;
-	(*bgn)->prv->nxt->nxt = NULL;
-	(*bgn)->prv = (*bgn)->prv->nxt;
-}
-
-t_map	*hck_create_map(int width, int height)
-{
-	t_map	*new;
-	t_map	*nxt;
-
-	new = NULL;
-	nxt = NULL;
-	int	i = 0;
-	while (i < height)
-	{
-		int	j = 0;
-		while (j < width)
-		{
-			new = hck_create_point(j, i);
-			if (!new)
-				hck_clear_point(nxt);
-			hck_point_add_back(&nxt, new);
-			j++;
-		}
-		i++;
-	}
-	return (nxt);
-}
-
 void	hck_link_diag_map(t_map **bgn)
 {
 	t_map	*tmp1;
@@ -146,6 +105,78 @@ void	hck_link_square_map(t_map **bgn)
 		}
 		tmp1 = tmp1->nxt;
 	}
+}
+
+void	hck_point_add_back(t_map **bgn, t_map *new)
+{
+	if (!new)
+		return ;
+	if (!(*bgn))
+	{
+		(*bgn) = new;
+		(*bgn)->prv = (*bgn);
+		(*bgn)->nxt = NULL;
+		return ;
+	}
+	(*bgn)->prv->nxt = new;
+	(*bgn)->prv->nxt->prv = (*bgn)->prv;
+	(*bgn)->prv->nxt->nxt = NULL;
+	(*bgn)->prv = (*bgn)->prv->nxt;
+}
+
+void	hck_center_map(t_map **bgn, int width, int height)
+{
+	int		i;
+	t_map	*tmp;
+
+	i = 0;
+	if (!bgn)
+		return ;
+	tmp = (*bgn);
+	while (i < width)
+	{
+		tmp->position.x = tmp->position.x - (width / 2);
+		i++;
+		tmp = tmp->nxt;
+	}
+	i = 0;
+	tmp = (*bgn);
+	while (i < height)
+	{
+		tmp->position.y = tmp->position.y - (height / 2);
+		i++;
+		tmp = tmp->nxt;
+	}
+}
+
+t_map	*hck_create_map(int width, int height)
+{
+	t_map	*new;
+	t_map	*nxt;
+
+	new = NULL;
+	nxt = NULL;
+	int	i = 0;
+	while (i < height)
+	{
+		int	j = 0;
+		while (j < width)
+		{
+			new = hck_create_point(j, i);
+			if (!new)
+				hck_clear_point(nxt);
+			hck_point_add_back(&nxt, new);
+			j++;
+		}
+		i++;
+	}
+	if (nxt)
+	{
+		hck_link_square_map(&nxt);
+		hck_link_diag_map(&nxt);
+		hck_center_map(&nxt, width, height);
+	}
+	return (nxt);
 }
 
 /// @todo remove main
