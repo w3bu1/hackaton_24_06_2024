@@ -4,8 +4,11 @@ void	hck_put_pixel(t_mlx *d, int x, int y, int col)
 {
 	char	*dst;
 
-	dst = d->adr + (y * d->len) + (x * (d->bpp / 8));
-	*(unsigned int *)dst = col;
+	if ((x + (WIDTH / 2) >= 0) && (x + (WIDTH / 2) < WIDTH) && (y + (HEIGHT / 2) >= 0) && (y + (HEIGHT / 2) < HEIGHT))
+	{
+		dst = d->adr + ((y + (HEIGHT / 2)) * d->len) + ((x + (WIDTH / 2)) * (d->bpp / 8));
+		*(unsigned int *)dst = col;
+	}
 }
 
 void	hck_draw_point_map(t_mlx *d)
