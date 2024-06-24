@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hck.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nrabehar <nrabehar@student.42antananari    +#+  +:+       +#+        */
+/*   By: nrabarij <nrabarij@student.42antanana>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 13:54:56 by nrabehar          #+#    #+#             */
-/*   Updated: 2024/06/24 13:55:40 by nrabehar         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:55:12 by nrabarij         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,30 @@ typedef struct s_img
 	int				bpp;
 }					t_img;
 
+/// @brief nb represent the neighbours [8]
+/// [0] top corner
+/// [1] top-right corner
+/// [2] right corner
+/// [3] bot-right corner
+/// [4] bot corner
+/// [5] bot-left corner
+/// [6] left corner
+/// [7] top-left corner
 typedef struct s_map
 {
 	t_point			position;
 	t_pion			*pion;
-	struct s_map	*r;
-	struct s_map	*l;
-	struct s_map	*t;
-	struct s_map	*b;
-	struct s_map	*tr;
-	struct s_map	*tl;
-	struct s_map	*bl;
-	struct s_map	*br;
+	// struct s_map	*r;
+	// struct s_map	*l;
+	// struct s_map	*t;
+	// struct s_map	*b;
+	// struct s_map	*tr;
+	// struct s_map	*tl;
+	// struct s_map	*bl;
+	// struct s_map	*br;
+	struct s_map	*nb[8];
+	struct s_map	*nxt;
+	struct s_map	*prv;
 }					t_map;
 
 typedef struct s_hck
