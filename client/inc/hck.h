@@ -118,5 +118,9 @@ char					*itoa(int n);
 char					*ft_joinstr(char *s1, char *s2);
 void					ft_select_pawn(t_skt *st, t_mlx *d, int x, int y);
 char					*hck_perform_act(t_skt *st, t_mlx *d, char *msg);
+char					*ft_substr(char const *s, unsigned int start,
+							size_t len);
+char					**ft_split(char const *s, char c);
+int						hck_is_coord_message(char *s);
 
 #endif

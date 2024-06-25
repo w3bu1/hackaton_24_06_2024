@@ -22,18 +22,18 @@ void	hck_main_socket_loop(t_hck *d)
 	while (!interrupted)
 	{
 		FD_ZERO(&readfds);
-		FD_SET(sock, &readfds);
+		FD_SET(d->d_skt.socket, &readfds);
 		FD_SET(STDIN_FILENO, &readfds);
-		max_sd = sock > STDIN_FILENO ? sock : STDIN_FILENO;
+		max_sd = d->d_skt.socket > STDIN_FILENO ? d->d_skt.socket : STDIN_FILENO;
 		select(max_sd + 1, &readfds, NULL, NULL, NULL);
 		if (FD_ISSET(STDIN_FILENO, &readfds))
 		{
 			fgets(buffer, BUFFER_SIZE, stdin);
-			send(sock, buffer, strlen(buffer), 0);
+			send(d->d_skt.socket, buffer, strlen(buffer), 0);
 		}
-		if (FD_ISSET(sock, &readfds))
+		if (FD_ISSET(d->d_skt.socket, &readfds))
 		{
-			valread = read(sock, buffer, BUFFER_SIZE);
+			valread = read(d->d_skt.socket, buffer, BUFFER_SIZE);
 			if (valread > 0)
 			{
 				buffer[valread] = '\0';
@@ -41,8 +41,8 @@ void	hck_main_socket_loop(t_hck *d)
 				if (strcmp(buffer, "exit") == 0)
 				{
 					interrupted = 1;
-					if (sock)
-						close(sock);
+					if (d->d_skt.socket)
+						close(d->d_skt.socket);
 					exit(0);
 				}
 				printf("Received: %s", buffer);
@@ -51,9 +51,9 @@ void	hck_main_socket_loop(t_hck *d)
 	}
 }
 
-void	hck_main_socket_create(struct sockaddr_in *serv_addr)
+void	hck_main_socket_create(struct sockaddr_in *serv_addr, t_skt *skt)
 {
-	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+	if ((skt->socket = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
 		perror("Socket creation error");
 		exit(1);
@@ -65,7 +65,7 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr)
 		perror("Invalid address/ Address not supported");
 		exit(1);
 	}
-	if (connect(sock, (struct sockaddr *)serv_addr, sizeof((*serv_addr))) < 0)
+	if (connect(skt->socket, (struct sockaddr *)serv_addr, sizeof((*serv_addr))) < 0)
 	{
 		perror("Connection Failed");
 		exit(1);
@@ -95,9 +95,9 @@ void	*hck_skt_loop(void *ag)
 {
 	struct sockaddr_in	serv_addr;
 	t_hck *d = (t_hck *)ag;
-	hck_main_socket_create(&serv_addr);
+	hck_main_socket_create(&serv_addr, &d->d_skt);
 	hck_main_socket_loop(d);
-	close(sock);
+	close(d->d_skt.socket);
 	return (NULL);
 }
 
@@ -117,6 +117,7 @@ int	main(void)
 {
 	pthread_t	t[2];
 	t_hck	d;
+	d.d_skt.socket = 0;
 	// pid_t				pid;
 	// struct sockaddr_in	serv_addr;
 	// char				buffer[BUFFER_SIZE] = {0};

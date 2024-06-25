@@ -8,7 +8,7 @@ INCS_DIR  = inc
 NAME = fanorona
 
 # files
-SRCS_FILES = main.c hck_map.c hck_mlx.c hck_memory.c hck_pawn.c hck_socket.c hck_utils.c
+SRCS_FILES = main.c hck_map.c hck_mlx.c hck_memory.c hck_pawn.c hck_socket.c hck_utils.c hck_split.c
 
 # objects
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
