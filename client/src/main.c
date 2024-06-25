@@ -39,7 +39,9 @@ void	hck_main_socket_loop(t_hck *d)
 			if (valread > 0)
 			{
 				buffer[valread] = '\0';
+				pthread_mutex_lock(&d->mtx);
 				hck_perform_act(&d->d_skt, &d->d_mlx, buffer);
+				pthread_mutex_unlock(&d->mtx);
 				if (strcmp(buffer, "exit") == 0)
 				{
 					interrupted = 1;
@@ -112,7 +114,9 @@ void	*hck_mlx_loop(void *ag)
 
 	d = (t_hck *)ag;
 	hck_mlx_init(&d->d_mlx);
+	pthread_mutex_lock(&d->mtx);
 	hck_ctrl(d);
+	pthread_mutex_unlock(&d->mtx);
 	mlx_loop(d->d_mlx.mlx);
 	// mlx_loop_hook(&d->d_mlx.mlx, &hck_ctrl, d);
 	return (NULL);
@@ -128,9 +132,11 @@ int	main(void)
 
 	d.d_skt.socket = 0;
 	signal(SIGINT, sigint_handler);
+	pthread_mutex_init(&d.mtx, NULL);
 	pthread_create(&t[0], NULL, &hck_mlx_loop, (void *)&d);
 	pthread_create(&t[1], NULL, &hck_skt_loop, (void *)&d);
 	pthread_join(t[0], NULL);
 	pthread_join(t[1], NULL);
+	pthread_mutex_destroy(&d.mtx);
 	return (0);
 }

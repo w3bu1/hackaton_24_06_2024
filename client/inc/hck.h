@@ -104,6 +104,7 @@ typedef struct s_hck
 {
 	t_mlx				d_mlx;
 	t_skt				d_skt;
+	pthread_mutex_t		mtx;
 }						t_hck;
 
 void					hck_error(int code);
