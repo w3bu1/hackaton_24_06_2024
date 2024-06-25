@@ -32,8 +32,14 @@ const server = net.createServer((socket) => {
   // Gérer les données reçues
   socket.on("data", async (data) => {
     console.log(`Received from ${currentClientId}: ${data}`);
-    await action.sendMessage(clients, `${data}\n`, currentClientId);
-    await action.playRequest(clients, currentClientId);
+    let message;
+    if (data.toString().includes("combo")) {
+      message = data.toString().substring(0, data.toString().indexOf("combo"));
+      console.log(`message : ${message}`);
+    } else message = data.toString();
+    await action.sendMessage(clients, `${message}\n`, currentClientId);
+    if (!data.toString().includes("combo"))
+      await action.playRequest(clients, currentClientId);
   });
 
   // Gérer la fin de la connexion
