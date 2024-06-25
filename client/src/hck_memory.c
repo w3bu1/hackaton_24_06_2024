@@ -8,7 +8,7 @@ void	hck_free(t_mlx *d)
 	{
 		if (d->map)
 			hck_clear_point(d->map);
-			// (&(d->map));
+		// (&(d->map));
 		if (d->mlx)
 		{
 			if (d->map_img)
@@ -17,6 +17,14 @@ void	hck_free(t_mlx *d)
 				mlx_destroy_window(d->mlx, d->win);
 			mlx_destroy_display(d->mlx);
 			free(d->mlx);
+		}
+		if (d->pawn_img[0] && d->pawn_img[1] && d->pawn_img[2]
+			&& d->pawn_img[3])
+		{
+			free(d->pawn_img[0]);
+			free(d->pawn_img[1]);
+			free(d->pawn_img[2]);
+			free(d->pawn_img[3]);
 		}
 		// free(d);
 	}
