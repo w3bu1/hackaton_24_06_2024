@@ -43,14 +43,15 @@ int	ft_can_move(t_map *pt)
 
 t_map	*hck_get_selected(t_map *map)
 {
-	while (map)
+	t_map	*selected;
+
+	selected = map;
+	while (selected)
 	{
-		printf("(%d, %d) -> [%d]\n", map->position.ox, map->position.oy, map->pawn.selected);
-		if (map->pawn.selected)
-			return (map);
-		map = map->nxt;
+		if (selected->pawn.selected)
+			return (selected);
+		selected = selected->nxt;
 	}
-	printf("tsy nisy select\n");
 	return (NULL);
 }
 
@@ -72,52 +73,44 @@ void	ft_select_pawn(t_mlx *d, int x, int y)
 	t_map	*selected;
 
 	map = d->map;
+	selected = hck_get_selected(d->map);
 	while (map)
 	{
 		if ((map->position.x + (WIDTH / 2) - 18 <= x && map->position.x + (WIDTH
 					/ 2) + 18 >= x) && (map->position.y + (HEIGHT / 2) - 18 <= y
 				&& map->position.y + (HEIGHT / 2) + 18 >= y))
 		{
-			if (map->pawn.player && ft_can_move(map))
-				map->pawn.selected = 1;
-			if (map->pawn.player == 1 && d->player == 1)
+			if (map->pawn.player == 1 && d->player == 1 && ft_can_move(map))
 			{
+				map->pawn.selected = 1;
 				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[2], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
 			}
-			else if (map->pawn.player == 2 && d->player == 2)
+			else if (map->pawn.player == 2 && d->player == 2 && ft_can_move(map))
 			{
+				map->pawn.selected = 1;
 				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[3], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
 			}
 			else if (map->pawn.player == 0)
 			{
-				printf("ato isika izao\n");
-				selected = hck_get_selected(d->map);
-				if (selected)
+				if (selected && hck_is_near(selected, map))
 				{
-					printf("(%d, %d)\n", selected->position.ox, selected->position.oy);
-					// printf("Afaka makeo\n");
+					printf("Afaka makeo\n");
+				}
+				else if (selected && hck_is_near(selected, map) == 0)
+				{
+					printf("AAAAAAAAA\n");
 				}
 			}
-		} else
+		} 
+		else if (map->pawn.selected == 1)
 		{
-			if (map->pawn.selected == 1 && map->pawn.player)
-			{
-				if (map->pawn.player == 0)
-				{
-
-				}
-				else
-				{
-					map->pawn.selected = 0;
-					if (map->pawn.player == 1 && d->player == 1)
-						mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[0], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
-					else if (map->pawn.player == 2 && d->player == 2)
-						mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[1], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
-				}
-			}
+			
+				map->pawn.selected = 0;
+				if (map->pawn.player == 1 && d->player == 1)
+					mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[0], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
+				else if (map->pawn.player == 2 && d->player == 2)
+					mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[1], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
 		}
-		// printf("hors loop\n");
 		map = map->nxt;
 	}
-	hck_get_selected(d->map);
 }
