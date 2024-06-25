@@ -33,8 +33,7 @@ const server = net.createServer((socket) => {
   socket.on("data", async (data) => {
     console.log(`Received from ${currentClientId}: ${data}`);
     await action.sendMessage(clients, `${data}\n`, currentClientId);
-    if (!data.toString().includes("combo"))
-      await action.playRequest(clients, currentClientId);
+    await action.playRequest(clients, currentClientId);
   });
 
   // Gérer la fin de la connexion
