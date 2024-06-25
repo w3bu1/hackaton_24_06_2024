@@ -45,7 +45,7 @@ int	ft_can_move(t_map *pt)
 
 int	ft_is_enemy(t_map *bgn, t_map *pt)
 {
-	if (!pt || pt->pawn.player)
+	if (!pt || !pt->pawn.player)
 		return (0);
 	if (pt->pawn.player != bgn->pawn.player)
 		return (1);
