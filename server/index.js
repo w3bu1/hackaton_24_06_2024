@@ -42,8 +42,10 @@ const server = net.createServer((socket) => {
       `${message}\n`,
       currentClientId
     );
-    if (!data.toString().includes("combo") && ret)
-      await action.playRequest(clients, currentClientId);
+    setTimeout(async () => {
+      if (!data.toString().includes("combo") && ret)
+        await action.playRequest(clients, currentClientId);
+    }, 700);
   });
 
   // Gérer la fin de la connexion
