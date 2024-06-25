@@ -5,6 +5,7 @@ async function sendMessage(clients, message, senderId = null) {
       clients[id].write(message);
     }
   }
+  return 1;
 }
 
 async function playRequest(clients, clientId) {

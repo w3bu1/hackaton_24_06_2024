@@ -6,6 +6,12 @@ char	*hck_perform_act(t_skt *st, t_mlx *d, char *msg)
 
 	(void)st;
 	printf("message [%s]\n", msg);
+	if (strncmp(msg, "exit", 4) == 0)
+	{
+		if (st->socket)
+			close(st->socket);
+		exit(0);
+	}
 	if (strncmp(msg, "play", 4) == 0)
 		d->player = atoi(msg + 4);
 	if (hck_is_coord_message(msg))

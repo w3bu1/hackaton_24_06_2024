@@ -42,14 +42,6 @@ void	hck_main_socket_loop(t_hck *d)
 				pthread_mutex_lock(&d->mtx);
 				hck_perform_act(&d->d_skt, &d->d_mlx, buffer);
 				pthread_mutex_unlock(&d->mtx);
-				if (strcmp(buffer, "exit") == 0)
-				{
-					interrupted = 1;
-					if (d->d_skt.socket)
-						close(d->d_skt.socket);
-					exit(0);
-				}
-				printf("Received: %s", buffer);
 			}
 		}
 	}

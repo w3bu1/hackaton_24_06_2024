@@ -37,8 +37,12 @@ const server = net.createServer((socket) => {
       message = data.toString().substring(0, data.toString().indexOf("combo"));
       console.log(`message : ${message}`);
     } else message = data.toString();
-    await action.sendMessage(clients, `${message}\n`, currentClientId);
-    if (!data.toString().includes("combo"))
+    let ret = await action.sendMessage(
+      clients,
+      `${message}\n`,
+      currentClientId
+    );
+    if (!data.toString().includes("combo") && ret)
       await action.playRequest(clients, currentClientId);
   });
 

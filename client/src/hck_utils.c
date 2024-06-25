@@ -2,7 +2,9 @@
 
 static size_t	ft_secure_strlen(char *s)
 {
-	size_t	i = 0;
+	size_t	i;
+
+	i = 0;
 	while (s && s[i])
 		i++;
 	return (i);
@@ -28,7 +30,7 @@ static size_t	ft_get_num_len(long n)
 	return (len);
 }
 
-char	*itoa(int	n)
+char	*itoa(int n)
 {
 	long	num;
 	char	*res;
@@ -81,7 +83,8 @@ char	*ft_joinstr(char *s1, char *s2)
 
 int	hck_is_coord_message(char *s)
 {
-	while (*s  && (((*s >= 9 && *s <= 13) || *s ==32) || (*s >= '0' && *s <= '9')))
-			s++;
+	while (*s && (((*s >= 9 && *s <= 13) || *s == 32) || (*s >= '0'
+				&& *s <= '9')))
+		s++;
 	return (*s == '\0');
 }
