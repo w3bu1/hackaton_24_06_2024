@@ -62,8 +62,7 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr, t_skt *skt)
 	}
 	serv_addr->sin_family = AF_INET;
 	serv_addr->sin_port = htons(PORT);
-	if (inet_pton(AF_INET, "https://hackaton-24-06-2024.vercel.app/",
-			&serv_addr->sin_addr) <= 0)
+	if (inet_pton(AF_INET, "127.0.0.1", &serv_addr->sin_addr) <= 0)
 	{
 		perror("Invalid address/ Address not supported");
 		exit(1);

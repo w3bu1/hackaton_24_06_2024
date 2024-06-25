@@ -1,6 +1,5 @@
 #include "../inc/hck.h"
 
-
 void	init_pawn(t_mlx *d)
 {
 	t_map	*map;
@@ -32,7 +31,9 @@ void	init_pawn(t_mlx *d)
 
 int	ft_can_move(t_map *pt)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	while (i < 8)
 	{
 		if (pt->nb[i] && !pt->nb[i]->pawn.player)
@@ -58,7 +59,9 @@ t_map	*hck_get_selected(t_map *map)
 
 int	hck_is_near(t_map *pt1, t_map *pt2)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	while (i < 8)
 	{
 		if (pt1->nb[i] && pt1->nb[i] == pt2)
@@ -72,6 +75,7 @@ void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 {
 	t_map	*map;
 	t_map	*selected;
+	char	*message;
 
 	map = d->map;
 	selected = hck_get_selected(d->map);
@@ -84,43 +88,49 @@ void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 			if (map->pawn.player == 1 && d->player == 1 && ft_can_move(map))
 			{
 				map->pawn.selected = 1;
-				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[2], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
+				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[2],
+					map->position.x + (WIDTH / 2) - 18, map->position.y
+					+ (HEIGHT / 2) - 18);
 			}
-			else if (map->pawn.player == 2 && d->player == 2 && ft_can_move(map))
+			else if (map->pawn.player == 2 && d->player == 2
+				&& ft_can_move(map))
 			{
 				map->pawn.selected = 1;
-				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[3], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
+				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[3],
+					map->position.x + (WIDTH / 2) - 18, map->position.y
+					+ (HEIGHT / 2) - 18);
 			}
-			else if (map->pawn.player == 0)
+			else if (map->pawn.player == 0 && selected && hck_is_near(selected,
+					map))
 			{
-				if (selected && hck_is_near(selected, map))
-				{
-					char	*message = ft_joinstr(itoa(selected->position.ox), " ");
-					message = ft_joinstr(message, itoa(selected->position.oy));
-					message = ft_joinstr(message, " ");
-					message = ft_joinstr(message, itoa(map->position.ox));
-					message = ft_joinstr(message, " ");
-					message = ft_joinstr(message, itoa(map->position.oy));
-					message = ft_joinstr(message, "\n");
-					if (message)
-						send(st->socket, message, strlen(message), 0);
-					free(message);
-					hck_move(d, (int [2]){selected->position.ox, selected->position.oy}, (int [2]){map->position.ox, map->position.oy});
-				}
-				else if (selected && hck_is_near(selected, map) == 0)
-				{
-					printf("AAAAAAAAA\n");
-				}
+				selected = hck_move(d, (int[2]){selected->position.ox,
+						selected->position.oy}, (int[2]){map->position.ox,
+						map->position.oy});
+				message = ft_joinstr(itoa(selected->position.ox), " ");
+				message = ft_joinstr(message, itoa(selected->position.oy));
+				message = ft_joinstr(message, " ");
+				message = ft_joinstr(message, itoa(map->position.ox));
+				message = ft_joinstr(message, " ");
+				message = ft_joinstr(message, itoa(map->position.oy));
+				message = ft_joinstr(message, "\n");
+				if (message)
+					send(st->socket, message, strlen(message), 0);
+				free(message);
+				if (ft_can_move(selected))
+					send(st->socket, "combo\n", strlen("combo\n"), 0);
 			}
-		} 
+		}
 		else if (map->pawn.selected == 1)
 		{
-			
-				map->pawn.selected = 0;
-				if (map->pawn.player == 1 && d->player == 1)
-					mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[0], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
-				else if (map->pawn.player == 2 && d->player == 2)
-					mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[1], map->position.x + (WIDTH / 2) - 18, map->position.y + (HEIGHT / 2) - 18);
+			map->pawn.selected = 0;
+			if (map->pawn.player == 1 && d->player == 1)
+				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[0],
+					map->position.x + (WIDTH / 2) - 18, map->position.y
+					+ (HEIGHT / 2) - 18);
+			else if (map->pawn.player == 2 && d->player == 2)
+				mlx_put_image_to_window(d->mlx, d->win, d->pawn_img[1],
+					map->position.x + (WIDTH / 2) - 18, map->position.y
+					+ (HEIGHT / 2) - 18);
 		}
 		map = map->nxt;
 	}

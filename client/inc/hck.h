@@ -124,11 +124,11 @@ char					*ft_substr(char const *s, unsigned int start,
 char					**ft_split(char const *s, char c);
 int						hck_is_coord_message(char *s);
 void					*ft_free_splitted_str(char **splitted);
-void    hck_move(t_mlx *d, int from[2], int dest[2]);
-void	hck_draw_point_map(t_mlx *d);
-void	hck_draw_lc_map(t_mlx *d);
-void	hck_draw_diag_right(t_mlx *d);
-void	hck_draw_diag_left(t_mlx *d);
-void	hck_put_pawn(t_mlx *d);
+t_map					*hck_move(t_mlx *d, int from[2], int dest[2]);
+void					hck_draw_point_map(t_mlx *d);
+void					hck_draw_lc_map(t_mlx *d);
+void					hck_draw_diag_right(t_mlx *d);
+void					hck_draw_diag_left(t_mlx *d);
+void					hck_put_pawn(t_mlx *d);
 
 #endif
