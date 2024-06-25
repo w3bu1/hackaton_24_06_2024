@@ -63,6 +63,7 @@ t_map	*hck_move(t_mlx *d, int from[2], int dest[2])
 	dst = get_exact_point(d, dest[0], dest[1]);
 	if (!dst)
 		return (NULL);
+	printf("[%p][%p]\n", dst, frm);
 	dst->pawn.player = frm->pawn.player;
 	dst->pawn.old_position = frm->position;
 	dst->pawn.selected = 0;
@@ -75,7 +76,6 @@ t_map	*hck_move(t_mlx *d, int from[2], int dest[2])
 	frm->pawn.selected = 0;
 	frm->pawn.status = 0;
 	bzero(d->adr, WIDTH * HEIGHT * (d->bpp / 8));
-	mlx_clear_window(d->mlx, d->win);
 	hck_draw_point_map(d);
 	hck_draw_lc_map(d);
 	hck_draw_diag_right(d);
