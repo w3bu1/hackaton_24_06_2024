@@ -69,6 +69,8 @@ t_map	*hck_move(t_mlx *d, int from[2], int dest[2])
 	dst->pawn.status = 1;
 	hck_perform_move(dst, hck_get_direction(frm, dst), hck_get_direction(dst,
 			frm));
+	if (!ft_is_combo(dst))
+		dst = NULL;
 	frm->pawn.player = 0;
 	frm->pawn.selected = 0;
 	frm->pawn.status = 0;

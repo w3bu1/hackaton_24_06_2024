@@ -147,7 +147,7 @@ void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 				if (message)
 					send(st->socket, message, strlen(message), 0);
 				free(message);
-				if (ft_is_combo(selected))
+				if (selected)
 					send(st->socket, "combo\n", strlen("combo\n"), 0);
 			}
 		}
