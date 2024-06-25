@@ -99,6 +99,7 @@ typedef struct s_skt
 	fd_set				readfds;
 	int					max_sd;
 	int					socket;
+	char				*ip;
 }						t_skt;
 
 typedef struct s_hck

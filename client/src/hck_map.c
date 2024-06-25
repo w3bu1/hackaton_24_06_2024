@@ -13,8 +13,9 @@ void	hck_clear_point(t_map *p)
 
 t_map	*hck_create_point(int x_pos, int y_pos, int width, int height)
 {
-	t_map	*map = NULL;
+	t_map	*map;
 
+	map = NULL;
 	map = (t_map *)malloc(sizeof(t_map));
 	if (map)
 	{
@@ -45,7 +46,8 @@ void	hck_link_diag_map(t_map **bgn)
 	tmp1 = (*bgn);
 	while (tmp1)
 	{
-		if ((tmp1->position.ox % 2 == 0 && tmp1->position.oy % 2 == 0) || (tmp1->position.ox % 2 != 0 && tmp1->position.oy % 2 != 0))
+		if ((tmp1->position.ox % 2 == 0 && tmp1->position.oy % 2 == 0)
+			|| (tmp1->position.ox % 2 != 0 && tmp1->position.oy % 2 != 0))
 		{
 			if (tmp1->nb[0])
 			{
@@ -91,7 +93,9 @@ void	hck_link_square_map(t_map **bgn)
 		if (tmp1->nxt)
 		{
 			tmp2 = tmp1->nxt;
-			if (tmp2->position.ox == tmp1->position.ox + 1 && tmp2->position.oy == tmp1->position.oy && tmp1->nb[2] == NULL)
+			if (tmp2->position.ox == tmp1->position.ox + 1
+				&& tmp2->position.oy == tmp1->position.oy
+				&& tmp1->nb[2] == NULL)
 			{
 				tmp1->nb[2] = tmp2;
 				tmp2->nb[6] = tmp1;
@@ -129,13 +133,15 @@ t_map	*hck_create_map(int width, int height)
 {
 	t_map	*new;
 	t_map	*nxt;
+	int		i;
+	int		j;
 
 	new = NULL;
 	nxt = NULL;
-	int	i = 0;
+	i = 0;
 	while (i < height)
 	{
-		int	j = 0;
+		j = 0;
 		while (j < width)
 		{
 			new = hck_create_point(j, i, width, height);
@@ -153,78 +159,3 @@ t_map	*hck_create_map(int width, int height)
 	}
 	return (nxt);
 }
-
-/// @todo remove main
-// int	main(void)
-// {
-// 	t_map	*map;
-// 	int	i, j;
-
-// 	i = 5;
-// 	j = 9;
-// 	map = hck_create_map(j, i);
-// 	if (!map)
-// 		exit(1);
-// 	hck_link_square_map(&map);
-// 	hck_link_diag_map(&map);
-// 	hck_print_map(map);
-// 	hck_clear_point(map);
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/// @todo remove printer
-// void	hck_print_map(t_map *tmp)
-// {
-// 	while (tmp)
-// 	{
-// 		printf("Cur: [%p]\t[%3d] [%3d]\tTop: [%p]\tRgt: [%p]\tDwn: [%p]\tLft: [%p]\n", tmp, tmp->position.x, tmp->position.y, tmp->nb[0], tmp->nb[2], tmp->nb[4], tmp->nb[6]);
-// 		printf("Cur: [%p]\t[%3d] [%3d]\tTR: [%p]\tBR: [%p]\tBL: [%p]\tTL: [%p]\n", tmp, tmp->position.x, tmp->position.y, tmp->nb[1], tmp->nb[3], tmp->nb[5], tmp->nb[7]);
-// 		tmp = tmp->nxt;
-// 	}
-// }

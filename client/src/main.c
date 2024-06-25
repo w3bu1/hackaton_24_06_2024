@@ -1,17 +1,5 @@
 #include "../inc/hck.h"
 
-int		sock = 0;
-int		interrupted = 0;
-
-void	sigint_handler(int sig)
-{
-	(void)sig;
-	interrupted = 1;
-	if (sock)
-		close(sock);
-	exit(0);
-}
-
 void	hck_main_socket_loop(t_hck *d)
 {
 	char	buffer[BUFFER_SIZE] = {0};
@@ -20,7 +8,7 @@ void	hck_main_socket_loop(t_hck *d)
 	int		valread;
 
 	valread = 0;
-	while (!interrupted)
+	while (1)
 	{
 		FD_ZERO(&readfds);
 		FD_SET(d->d_skt.socket, &readfds);
@@ -56,7 +44,7 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr, t_skt *skt)
 	}
 	serv_addr->sin_family = AF_INET;
 	serv_addr->sin_port = htons(PORT);
-	if (inet_pton(AF_INET, "127.0.0.1", &serv_addr->sin_addr) <= 0)
+	if (inet_pton(AF_INET, skt->ip, &serv_addr->sin_addr) <= 0)
 	{
 		perror("Invalid address/ Address not supported");
 		exit(1);
@@ -69,24 +57,6 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr, t_skt *skt)
 	}
 	printf("Connected to server\n");
 }
-
-/// @todo remove unused comments;
-// int	main(void)
-// {
-// 	struct sockaddr_in	serv_addr;
-// 	char				buffer[BUFFER_SIZE] = {0};
-// 	fd_set				readfds;
-// 	int					max_sd = 0;
-// 	t_mlx				d;
-
-// 	signal(SIGINT, sigint_handler);
-// 	hck_main_socket_create(&serv_addr);
-// 	hck_mlx_init(&d);
-// 	mlx_loop(d.mlx);
-// 	hck_main_socket_loop(&readfds, buffer, max_sd);
-// 	close(sock);
-// 	return (0);
-// }
 
 void	*hck_skt_loop(void *ag)
 {
@@ -114,17 +84,24 @@ void	*hck_mlx_loop(void *ag)
 	return (NULL);
 }
 
-/// @todo handle communication between mlx window and fork main_socket
-/// @todo create map and pions
-/// @todo centralize map, reduce screen width to fit two mlx_windows on screen
-int	main(void)
+int	main(int ac, char **av)
 {
 	pthread_t	t[2];
 	t_hck		d;
 
-	XInitThreads();
+	if (ac < 2)
+		exit(1);
+	d.d_mlx.adr = NULL;
+	d.d_mlx.bpp = 0;
+	d.d_mlx.end = 0;
+	d.d_mlx.len = 0;
+	d.d_mlx.map = 0;
+	d.d_mlx.map_img = NULL;
+	d.d_mlx.player = 0;
+	d.d_mlx.win = NULL;
+	d.d_skt.ip = av[1];
 	d.d_skt.socket = 0;
-	signal(SIGINT, sigint_handler);
+	XInitThreads();
 	pthread_mutex_init(&d.mtx, NULL);
 	pthread_create(&t[0], NULL, &hck_mlx_loop, (void *)&d);
 	pthread_create(&t[1], NULL, &hck_skt_loop, (void *)&d);

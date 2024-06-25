@@ -42,7 +42,6 @@ void	hck_kill_pawn(t_map *bgn, int direction)
 
 t_map	*hck_perform_move(t_map *bgn, int dir1, int dir2)
 {
-	printf("dir1 %d - dir2 %d\n", dir1, dir2);
 	if (bgn->nb[dir1] && bgn->nb[dir1]->pawn.player
 		&& bgn->nb[dir1]->pawn.player != bgn->pawn.player)
 	{
@@ -70,7 +69,6 @@ t_map	*hck_move(t_mlx *d, int from[2], int dest[2])
 	dst = get_exact_point(d, dest[0], dest[1]);
 	if (!dst)
 		return (NULL);
-	printf("[%p][%p]\n", dst, frm);
 	dst->pawn.player = frm->pawn.player;
 	dst->pawn.old_position = frm->position;
 	dst->pawn.selected = 0;
