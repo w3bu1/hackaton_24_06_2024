@@ -1,5 +1,6 @@
 #include "../inc/hck.h"
 
+
 void	init_pawn(t_mlx *d)
 {
 	t_map	*map;
@@ -67,7 +68,7 @@ int	hck_is_near(t_map *pt1, t_map *pt2)
 	return (0);
 }
 
-void	ft_select_pawn(t_mlx *d, int x, int y)
+void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 {
 	t_map	*map;
 	t_map	*selected;
@@ -94,6 +95,16 @@ void	ft_select_pawn(t_mlx *d, int x, int y)
 			{
 				if (selected && hck_is_near(selected, map))
 				{
+					char	*message = ft_joinstr(itoa(selected->position.ox), "  ");
+					message = ft_joinstr(message, itoa(selected->position.oy));
+					message = ft_joinstr(message, " ");
+					message = ft_joinstr(message, itoa(map->position.ox));
+					message = ft_joinstr(message, " ");
+					message = ft_joinstr(message, itoa(map->position.oy));
+					printf("[%s]\n", message);
+					(void)st;
+					// send(st->socket, message, strlen(message), 0);
+					free(message);
 					printf("Afaka makeo\n");
 				}
 				else if (selected && hck_is_near(selected, map) == 0)

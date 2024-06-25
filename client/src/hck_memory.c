@@ -35,17 +35,17 @@ int	hck_exit(t_mlx *d)
 	exit(0);
 }
 
-int	hck_mouse(int key, int x, int y, t_mlx *d)
+int	hck_mouse(int key, int x, int y, t_hck *d)
 {
 	if (key == 1)
-		ft_select_pawn(d, x, y);
+		ft_select_pawn(&d->d_skt, &d->d_mlx, x, y);
 	return (0);
 }
 
-int	hck_ctrl(t_mlx *d)
+int	hck_ctrl(t_hck *d)
 {
-	mlx_hook(d->win, 17, 0, &hck_exit, d);
-	mlx_hook(d->win, 2, 1L << 0, &hck_mlx_key, d);
-	mlx_mouse_hook(d->win, &hck_mouse, d);
+	mlx_hook(d->d_mlx.win, 17, 0, &hck_exit, &d->d_mlx);
+	mlx_hook(d->d_mlx.win, 2, 1L << 0, &hck_mlx_key, &d->d_mlx);
+	mlx_mouse_hook(d->d_mlx.win, &hck_mouse, d);
 	return (0);
 }

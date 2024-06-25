@@ -103,11 +103,10 @@ void	*hck_skt_loop(void *ag)
 
 void	*hck_mlx_loop(void *ag)
 {
-	t_mlx	*d = (t_mlx *)ag;
-	d->revalidate = 0;
-	hck_mlx_init(d);
+	t_hck	*d = (t_hck *)ag;
+	hck_mlx_init(&d->d_mlx);
 	hck_ctrl(d);
-	mlx_loop(d->mlx);
+	mlx_loop(d->d_mlx.mlx);
 	return (NULL);
 }
 
@@ -126,7 +125,7 @@ int	main(void)
 	// t_mlx				d;
 
 	signal(SIGINT, sigint_handler);
-	pthread_create(&t[0], NULL, &hck_mlx_loop, (void *)&d.d_mlx);
+	pthread_create(&t[0], NULL, &hck_mlx_loop, (void *)&d);
 	pthread_create(&t[1], NULL, &hck_skt_loop, (void *)&d);
 	// hck_main_socket_create(&serv_addr);
 	// hck_main_socket_loop(&readfds, buffer, max_sd);
