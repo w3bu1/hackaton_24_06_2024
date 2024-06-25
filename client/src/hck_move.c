@@ -28,4 +28,9 @@ void    hck_move(t_mlx *d, int from[2], int dest[2])
     frm->pawn.selected = 0;
     frm->pawn.status = 0;
     bzero(d->adr,  WIDTH * HEIGHT *  (d->bpp / 8));
+    hck_draw_point_map(d);
+    hck_draw_lc_map(d);
+    hck_draw_diag_right(d);
+    hck_draw_diag_left(d);
+    mlx_put_image_to_window(d->mlx, d->win, d->map_img, 0, 0);
 }

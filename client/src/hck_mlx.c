@@ -21,7 +21,6 @@ void	hck_draw_point_map(t_mlx *d)
 		hck_put_pixel(d, map->position.x, map->position.y, HCK_WHITE);
 		map = map->nxt;
 	}
-	mlx_put_image_to_window(d->mlx, d->win, d->map_img, 0, 0);
 }
 
 void	hck_draw_lc_map(t_mlx *d)
@@ -128,13 +127,6 @@ void	hck_draw_diag_left(t_mlx *d)
 
 void	hck_put_pawn(t_mlx *d)
 {
-	int h = 36;
-	int w = 36;
-
-	d->pawn_img[0] = mlx_xpm_file_to_image(d->mlx, "./data/p1.xpm", &w, &h);
-	d->pawn_img[1] = mlx_xpm_file_to_image(d->mlx, "./data/p2.xpm", &w, &h);
-	d->pawn_img[2] = mlx_xpm_file_to_image(d->mlx, "./data/sp1.xpm", &w, &h);
-	d->pawn_img[3] = mlx_xpm_file_to_image(d->mlx, "./data/sp2.xpm", &w, &h);
 	t_map	*map = d->map;
 	while (map)
 	{
@@ -164,6 +156,13 @@ void	hck_mlx_init(t_mlx *d)
 	d->mlx = mlx_init();
 	if (!d->mlx)
 		return (perror(HCK_ERROR), hck_free(d));
+	int h = 36;
+	int w = 36;
+
+	d->pawn_img[0] = mlx_xpm_file_to_image(d->mlx, "./data/p1.xpm", &w, &h);
+	d->pawn_img[1] = mlx_xpm_file_to_image(d->mlx, "./data/p2.xpm", &w, &h);
+	d->pawn_img[2] = mlx_xpm_file_to_image(d->mlx, "./data/sp1.xpm", &w, &h);
+	d->pawn_img[3] = mlx_xpm_file_to_image(d->mlx, "./data/sp2.xpm", &w, &h);
 	init_pawn(d);
 	d->win = mlx_new_window(d->mlx, WIDTH, HEIGHT, "fanorona");
 	if (!d->win)
@@ -179,5 +178,6 @@ void	hck_mlx_init(t_mlx *d)
 	// hck_draw_diag(d);
 	hck_draw_diag_right(d);
 	hck_draw_diag_left(d);
+	mlx_put_image_to_window(d->mlx, d->win, d->map_img, 0, 0);
 	hck_put_pawn(d);
 }

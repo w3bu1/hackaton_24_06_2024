@@ -105,7 +105,7 @@ void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 					if (message)
 						send(st->socket, message, strlen(message), 0);
 					free(message);
-					printf("Afaka makeo\n");
+					hck_move(d, (int [2]){selected->position.ox, selected->position.oy}, (int [2]){map->position.ox, map->position.oy});
 				}
 				else if (selected && hck_is_near(selected, map) == 0)
 				{
