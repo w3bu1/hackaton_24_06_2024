@@ -32,7 +32,7 @@ const server = net.createServer((socket) => {
   // Gérer les données reçues
   socket.on("data", async (data) => {
     console.log(`Received from ${currentClientId}: ${data}`);
-    await action.sendMessage(clients, `${data.toString()}\n`, currentClientId);
+    await action.sendMessage(clients, `${data}\n`, currentClientId);
     if (!data.toString().includes("combo"))
       await action.playRequest(clients, currentClientId);
   });

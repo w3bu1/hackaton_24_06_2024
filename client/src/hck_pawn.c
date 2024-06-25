@@ -43,6 +43,37 @@ int	ft_can_move(t_map *pt)
 	return (0);
 }
 
+int	ft_is_enemy(t_map *bgn, t_map *pt)
+{
+	if (!pt || pt->pawn.player)
+		return (0);
+	if (pt->pawn.player != bgn->pawn.player)
+		return (1);
+	return (0);
+}
+
+int	ft_is_combo(t_map *pt)
+{
+	int	i;
+	int	ngt;
+
+	if (!ft_can_move(pt))
+		return (0);
+	i = 0;
+	while (i < 8)
+	{
+		ngt = i < 4 ? i + 4 : i - 4;
+		if (pt->nb[i] && ft_is_enemy(pt, pt->nb[i]) && pt->nb[ngt]
+			&& !pt->nb[ngt]->pawn.player)
+			return (1);
+		else if (pt->nb[i] && pt->nb[i]->nb[i] && ft_is_enemy(pt,
+				pt->nb[i]->nb[i]) && !pt->nb[i]->pawn.player)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 t_map	*hck_get_selected(t_map *map)
 {
 	t_map	*selected;
@@ -116,7 +147,7 @@ void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 				if (message)
 					send(st->socket, message, strlen(message), 0);
 				free(message);
-				if (ft_can_move(selected))
+				if (ft_is_combo(selected))
 					send(st->socket, "combo\n", strlen("combo\n"), 0);
 			}
 		}
