@@ -44,6 +44,7 @@ int	hck_mouse(int key, int x, int y, t_hck *d)
 
 int	hck_ctrl(t_hck *d)
 {
+	printf("sous control\n");
 	mlx_hook(d->d_mlx.win, 17, 0, &hck_exit, &d->d_mlx);
 	mlx_hook(d->d_mlx.win, 2, 1L << 0, &hck_mlx_key, &d->d_mlx);
 	mlx_mouse_hook(d->d_mlx.win, &hck_mouse, d);

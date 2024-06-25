@@ -102,12 +102,14 @@ void	*hck_skt_loop(void *ag)
 	return (NULL);
 }
 
+
 void	*hck_mlx_loop(void *ag)
 {
 	t_hck	*d = (t_hck *)ag;
 	hck_mlx_init(&d->d_mlx);
 	hck_ctrl(d);
 	mlx_loop(d->d_mlx.mlx);
+	// mlx_loop_hook(&d->d_mlx.mlx, &hck_ctrl, d);
 	return (NULL);
 }
 
