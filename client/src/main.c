@@ -130,6 +130,7 @@ int	main(void)
 	pthread_t	t[2];
 	t_hck		d;
 
+	XInitThreads();
 	d.d_skt.socket = 0;
 	signal(SIGINT, sigint_handler);
 	pthread_mutex_init(&d.mtx, NULL);

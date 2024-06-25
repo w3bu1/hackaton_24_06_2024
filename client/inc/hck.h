@@ -2,6 +2,7 @@
 # define HCK_H
 
 # include "../mlx/mlx.h"
+# include <X11/Xlib.h>
 # include <arpa/inet.h>
 # include <pthread.h>
 # include <signal.h>
