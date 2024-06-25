@@ -40,16 +40,23 @@ void	hck_kill_pawn(t_map *bgn, int direction)
 	bgn->pawn.status = 0;
 }
 
-void	hck_perform_move(t_map *bgn, int dir1, int dir2)
+t_map	*hck_perform_move(t_map *bgn, int dir1, int dir2)
 {
 	printf("dir1 %d - dir2 %d\n", dir1, dir2);
 	if (bgn->nb[dir1] && bgn->nb[dir1]->pawn.player
 		&& bgn->nb[dir1]->pawn.player != bgn->pawn.player)
+	{
 		hck_kill_pawn(bgn->nb[dir1], dir1);
+		return (bgn);
+	}
 	else if (bgn->nb[dir2] && bgn->nb[dir2]->nb[dir2]
 		&& bgn->nb[dir2]->nb[dir2]->pawn.player
 		&& bgn->nb[dir2]->nb[dir2]->pawn.player != bgn->pawn.player)
+	{
 		hck_kill_pawn(bgn->nb[dir2]->nb[dir2], dir2);
+		return (bgn);
+	}
+	return (NULL);
 }
 
 t_map	*hck_move(t_mlx *d, int from[2], int dest[2])
@@ -68,9 +75,9 @@ t_map	*hck_move(t_mlx *d, int from[2], int dest[2])
 	dst->pawn.old_position = frm->position;
 	dst->pawn.selected = 0;
 	dst->pawn.status = 1;
-	hck_perform_move(dst, hck_get_direction(frm, dst), hck_get_direction(dst,
-			frm));
-	if (!ft_is_combo(dst))
+	dst = hck_perform_move(dst, hck_get_direction(frm, dst),
+			hck_get_direction(dst, frm));
+	if (dst && !ft_is_combo(dst))
 		dst = NULL;
 	frm->pawn.player = 0;
 	frm->pawn.selected = 0;

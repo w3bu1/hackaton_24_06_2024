@@ -133,5 +133,6 @@ void					hck_draw_lc_map(t_mlx *d);
 void					hck_draw_diag_right(t_mlx *d);
 void					hck_draw_diag_left(t_mlx *d);
 void					hck_put_pawn(t_mlx *d);
+int						hck_is_end_game(t_map *map);
 
 #endif

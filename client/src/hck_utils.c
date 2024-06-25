@@ -88,3 +88,21 @@ int	hck_is_coord_message(char *s)
 		s++;
 	return (*s == '\0');
 }
+
+int	hck_is_end_game(t_map *map)
+{
+	int	p1;
+	int	p2;
+
+	p1 = 0;
+	p2 = 0;
+	while (map)
+	{
+		if (map->pawn.player == 1)
+			p1++;
+		if (map->pawn.player == 2)
+			p2++;
+		map = map->nxt;
+	}
+	return (!p1 || !p2);
+}

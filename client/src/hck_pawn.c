@@ -165,6 +165,11 @@ void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 					map->position.x + (WIDTH / 2) - 18, map->position.y
 					+ (HEIGHT / 2) - 18);
 		}
+		if (hck_is_end_game(d->map))
+		{
+			hck_free(d);
+			exit(0);
+		}
 		map = map->nxt;
 	}
 }
