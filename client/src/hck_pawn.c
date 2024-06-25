@@ -140,15 +140,17 @@ void	ft_select_pawn(t_skt *st, t_mlx *d, int x, int y)
 				message = ft_joinstr(message, itoa(map->position.ox));
 				message = ft_joinstr(message, " ");
 				message = ft_joinstr(message, itoa(map->position.oy));
-				message = ft_joinstr(message, "\n");
+				// message = ft_joinstr(message, "\n");
 				selected = hck_move(d, (int[2]){selected->position.ox,
 						selected->position.oy}, (int[2]){map->position.ox,
 						map->position.oy});
+				free(message);
+				if (selected)
+					message = ft_joinstr(message, " combo\n");
+				else
+					message = ft_joinstr(message, "\n");
 				if (message)
 					send(st->socket, message, strlen(message), 0);
-				free(message);
-				// if (selected)
-				// 	send(st->socket, "combo\n", strlen("combo\n"), 0);
 			}
 		}
 		else if (map->pawn.selected == 1)
