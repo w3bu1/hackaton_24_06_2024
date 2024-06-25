@@ -23,6 +23,7 @@ void	hck_main_socket_loop(t_hck *d)
 	{
 		FD_ZERO(&readfds);
 		FD_SET(d->d_skt.socket, &readfds);
+		d->d_skt.readfds = readfds;
 		FD_SET(STDIN_FILENO, &readfds);
 		max_sd = d->d_skt.socket > STDIN_FILENO ? d->d_skt.socket : STDIN_FILENO;
 		select(max_sd + 1, &readfds, NULL, NULL, NULL);

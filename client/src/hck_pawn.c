@@ -12,8 +12,8 @@ void	init_pawn(t_mlx *d)
 		map->pawn.status = 1;
 		map->pawn.position.x = map->position.x;
 		map->pawn.position.y = map->position.y;
-		map->pawn.old_position.x = map->position.x;
-		map->pawn.old_position.y = map->position.y;
+		map->pawn.old_position.x = map->position.ox;
+		map->pawn.old_position.y = map->position.oy;
 		if (map->position.oy < (5 / 2) || (map->position.oy == (5 / 2)
 				&& ((map->position.ox % 2 == 0 && map->position.ox < (9 / 2))
 					|| (map->position.ox % 2 == 1 && map->position.ox > (9

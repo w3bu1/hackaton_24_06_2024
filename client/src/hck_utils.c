@@ -81,14 +81,7 @@ char	*ft_joinstr(char *s1, char *s2)
 
 int	hck_is_coord_message(char *s)
 {
-	while (*s && *s != '\n')
-	{
-		while ((*s >= 9 && *s <= 13) || *s ==32)
+	while (*s  && (((*s >= 9 && *s <= 13) || *s ==32) || (*s >= '0' && *s <= '9')))
 			s++;
-		while (*s >= '0' && *s <= '9')
-			s++;
-	}
-	if (*s == '\n' || !*s)
-		return (1);
-	return (0);
+	return (*s == '\0');
 }

@@ -71,12 +71,12 @@ static char	*ft_get_word(char const *str, char c, size_t start)
 	return (word);
 }
 
-static void	*ft_free_all(char **splitted, size_t last_id)
+void	*ft_free_splitted_str(char **splitted)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < last_id)
+	while (splitted[i])
 	{
 		free(splitted[i]);
 		i++;
@@ -106,7 +106,7 @@ char	**ft_split(char const *s, char c)
 	{
 		splitted[i] = ft_get_word(s, c, w_id);
 		if (!splitted[i])
-			return (ft_free_all(splitted, i));
+			return (ft_free_splitted_str(splitted));
 		w_id = ft_get_next_id(s, c, w_id);
 		i++;
 	}
