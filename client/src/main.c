@@ -17,8 +17,9 @@ void	hck_main_socket_loop(t_hck *d)
 	char	buffer[BUFFER_SIZE] = {0};
 	fd_set	readfds;
 	int		max_sd;
-	int	valread = 0;
+	int		valread;
 
+	valread = 0;
 	while (!interrupted)
 	{
 		FD_ZERO(&readfds);
@@ -61,12 +62,14 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr, t_skt *skt)
 	}
 	serv_addr->sin_family = AF_INET;
 	serv_addr->sin_port = htons(PORT);
-	if (inet_pton(AF_INET, "127.0.0.1", &serv_addr->sin_addr) <= 0)
+	if (inet_pton(AF_INET, "https://hackaton-24-06-2024.vercel.app/",
+			&serv_addr->sin_addr) <= 0)
 	{
 		perror("Invalid address/ Address not supported");
 		exit(1);
 	}
-	if (connect(skt->socket, (struct sockaddr *)serv_addr, sizeof((*serv_addr))) < 0)
+	if (connect(skt->socket, (struct sockaddr *)serv_addr,
+			sizeof((*serv_addr))) < 0)
 	{
 		perror("Connection Failed");
 		exit(1);
@@ -95,17 +98,20 @@ void	hck_main_socket_create(struct sockaddr_in *serv_addr, t_skt *skt)
 void	*hck_skt_loop(void *ag)
 {
 	struct sockaddr_in	serv_addr;
-	t_hck *d = (t_hck *)ag;
+	t_hck				*d;
+
+	d = (t_hck *)ag;
 	hck_main_socket_create(&serv_addr, &d->d_skt);
 	hck_main_socket_loop(d);
 	close(d->d_skt.socket);
 	return (NULL);
 }
 
-
 void	*hck_mlx_loop(void *ag)
 {
-	t_hck	*d = (t_hck *)ag;
+	t_hck	*d;
+
+	d = (t_hck *)ag;
 	hck_mlx_init(&d->d_mlx);
 	hck_ctrl(d);
 	mlx_loop(d->d_mlx.mlx);
@@ -119,21 +125,12 @@ void	*hck_mlx_loop(void *ag)
 int	main(void)
 {
 	pthread_t	t[2];
-	t_hck	d;
-	d.d_skt.socket = 0;
-	// pid_t				pid;
-	// struct sockaddr_in	serv_addr;
-	// char				buffer[BUFFER_SIZE] = {0};
-	// fd_set				readfds;
-	// int					max_sd = 0;
-	// t_mlx				d;
+	t_hck		d;
 
+	d.d_skt.socket = 0;
 	signal(SIGINT, sigint_handler);
 	pthread_create(&t[0], NULL, &hck_mlx_loop, (void *)&d);
 	pthread_create(&t[1], NULL, &hck_skt_loop, (void *)&d);
-	// hck_main_socket_create(&serv_addr);
-	// hck_main_socket_loop(&readfds, buffer, max_sd);
-	// close(sock);
 	pthread_join(t[0], NULL);
 	pthread_join(t[1], NULL);
 	return (0);
