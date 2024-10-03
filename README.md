@@ -18,13 +18,7 @@ The team is composed of `four members`. We are students at `42 Antananarivo` fol
 
 @**nrabehar** [github profile](https://github.com/nrabehar)
 
-<div>
-    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover; margin-right: 30px;" alt="anjrakot" src="blob/anjrakot.jpg">
-    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover; margin-right: 30px;" alt="hramaros" src="blob/hramaros.jpg">
-    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover; margin-right: 30px;" alt="nrabarij" src="blob/nrabarij.jpg">
-    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover;" alt="nrabehar" src="blob/nrabehar.jpg">
-</div>
-
+![profiles](blob/profiles.png)
 
 ## Project Overview
 
@@ -34,6 +28,8 @@ For our part, we decided to code a popular Malagasy game called `Fanorona`.
 
 The game consists of ***two players***, opposing each other.
 
+## Technologies
+
 The program is basically written in `C` and uses the `MinilibX` library as a graphical API. It also utilizes a `Node.js` script for network communication.
 
 ### Strategy
@@ -41,6 +37,8 @@ The program is basically written in `C` and uses the `MinilibX` library as a gra
 The game is played on a board of `3x3`, `5x5` or `9x5`. Represented as `[column]x[lines]`.
 
 It has two sides, composed of stones (or any items which can represent the pawns). The white and black pawns take alternate turns, starting with white in order to capture the opposing pieces.
+
+![fanorona](https://fanorona.jpg)
 
 There are two kinds of moves:
 
