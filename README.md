@@ -2,9 +2,9 @@
 
 This project is part of the intra-university `hackathon` of `Ecole 42 Antananarivo`.
 
-The theme was 🎆`Independence Day`🎆.
+The theme for this hackathon is 🎆`Independence Day`🎆.
 
-It started on `2024-06-24 at 8 A.M`. and ended on `2024-06-25 at 12 P.M`.
+The event started on `2024-06-24 at 8 A.M`. and ended on `2024-06-25 at 12 P.M`.
 
 ## Team
 
