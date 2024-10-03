@@ -18,7 +18,7 @@ The team is composed of `four members`. We are students at `42 Antananarivo` fol
 
 @**nrabehar** [github profile](https://github.com/nrabehar)
 
-![profiles](blob/profiles.png)
+![profiles](https://github.com/w3bu1/blob/blob/main/hackaton_24_06_2024/profiles.png?raw=true)
 
 ## Project Overview
 
