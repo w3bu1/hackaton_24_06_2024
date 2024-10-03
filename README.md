@@ -24,19 +24,19 @@ The team is composed of `four members`. We are students at `42 Antananarivo` fol
 
 Because the theme of the hackathon was `Independence day`, all the projects requested had to be related to `Malagasy traditions and customs`.
 
-For our part, we decided to code a popular Malagasy game called `Fanorona`.
+For our part, we decided to code our popular Malagasy game called `Fanorona`.
 
 The game consists of ***two players***, opposing each other.
 
 ## Technologies
 
-The program is basically written in `C` and uses the `MinilibX` library as a graphical API. It also utilizes a `Node.js` script for network communication.
+This program is basically written in `C` and uses the `MinilibX` library as a graphical API. It also utilizes a `Node.js` script for network communication.
 
 ### Strategy
 
 The game is played on a board of `3x3`, `5x5` or `9x5`. Represented as `[column]x[lines]`.
 
-It has two sides, composed of stones (or any items which can represent the pawns). The white and black pawns take alternate turns, starting with white in order to capture the opposing pieces.
+It has two sides, composed of stones (or any items which can represent the pawns). The `white` and `black` pawns take `alternate turns`, starting with white in order to capture the opposing pieces.
 
 ![fanorona](https://fanorona.jpg)
 
@@ -59,7 +59,71 @@ The real deal is to be able to play the game from `two different computers`, by 
 
 ### Usage
 
-TODO
+Currently we are working on public deployment in order to make the game enjoyable online.
+
+If you want to test `fanorona` locally, here are the steps:
+
+- Prerequisites:
+
+1. **Linux OS (preferred Stable Version)**
+2. **Build-Essentials**
+3. **NodeJs**
+
+- Clone the project:
+
+```bash
+git clone https://github.com/w3bu1/hackaton_24_06_2024.git
+```
+
+- Go to the root directory and compile the game:
+
+```bash
+cd hackathon_24_06_2024/ &&\
+
+make &&\
+
+cd ../
+```
+
+At the root directory (`hackathon_24_06_2024`), open `three terminals`:
+
+1. The `first one` should launch the `local server`.
+2. The `second one` will launch the `first player` program.
+3. The `third one` will lauch the `second player` program.
+
+- Launch the local server on the first Terminal:
+
+```bash
+cd server/ &&\
+
+node index.js
+```
+
+>Note: You will see the broadcast messages from the server, don't touch anything in this terminal, if you still want to test the game, otherwise you are gonna need to relaunch the server with `nodejs`.
+
+- Launch the first player in the second Terminal:
+
+```bash
+cd client/ &&\
+
+./fanorona 127.0.0.1
+```
+
+>Note: The provided command will display the first player interface. You still can not play the game until another player joins the room.
+
+- Finally launch the second player in the third Terminal:
+
+```bash
+cd client/ &&\
+
+./fanorona 127.0.0.1
+```
+
+Enjoy the game 😎
+
+- Stoping the game:
+
+If you want to `close efficiently everything` just close the windows of the players, go to the `first Terminal` (the one that displays broadcast messages) and type `Ctrl + C`.
 
 ### License
 
