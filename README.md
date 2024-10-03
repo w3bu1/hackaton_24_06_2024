@@ -56,3 +56,18 @@ The real deal is to be able to play the game from `two different computers`, by 
 ### Usage
 
 TODO
+
+### License
+
+TODO
+
+### Acknowledgements
+
+- **42 Antananarivo**
+- **Axian Group**
+- **Telma Foundation**
+- **NextA**
+- **MinilibX**
+- **All Teammates**
+
+[images-of-acknowledges](https://images/blob)
