@@ -125,10 +125,6 @@ Enjoy the game 😎
 
 If you want to `close efficiently everything` just close the windows of the players, go to the `first Terminal` (the one that displays broadcast messages) and type `Ctrl + C`.
 
-## License
-
-TODO
-
 ## Acknowledgements
 
 - **42 Antananarivo**
