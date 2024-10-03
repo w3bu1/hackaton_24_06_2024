@@ -121,15 +121,16 @@ cd client/ &&\
 
 Enjoy the game 😎
 
-- Stoping the game:
+- Stopping the game:
 
 If you want to `close efficiently everything` just close the windows of the players, go to the `first Terminal` (the one that displays broadcast messages) and type `Ctrl + C`.
 
 ## Acknowledgements
 
-- **42 Antananarivo**
+- **Ntaolo Malagasy**
+- **All Teammates**
 - **Axian Group**
+- **42 Antananarivo**
 - **Telma Foundation**
 - **NextA**
 - **MinilibX**
-- **All Teammates**
