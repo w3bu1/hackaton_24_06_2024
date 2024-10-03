@@ -32,26 +32,26 @@ For our part, we decided to code our popular Malagasy game called `Fanorona`.
 
 The game consists of ***two players***, opposing each other.
 
-#### <u>Strategy</u>
+#### Strategy
 
 The game is played on a board of `3x3`, `5x5` or `9x5`. Represented as `[column]x[lines]`.
 
 It has two sides, composed of stones (or any items which can represent the pawns). The `white` and `black` pawns take `alternate turns`, starting with white in order to capture the opposing pieces.
 
-![fanorona](https://fanorona.jpg)
+![fanorona](https://github.com/w3bu1/blob/blob/main/hackaton_24_06_2024/fanorona.png?raw=true)
 
 There are two kinds of moves:
 
 - A **non-capturing move**, which is called a `paika`.
 - And a **capturing move**.
 
-#### <u>End conditions</u>
+#### End conditions
 
 If one player captures all opponent's stones, the game `ends` and the player `wins`.
 
 Or, if neither player can achieve this, the game ends with a `Draw`.
 
-#### <u>Challenges</u>
+#### Challenges
 
 We faced the challenge of creating a simple game, yet enjoyable.
 
