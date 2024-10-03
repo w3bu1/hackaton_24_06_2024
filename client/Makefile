@@ -14,7 +14,7 @@ SRCS_FILES = main.c hck_map.c hck_mlx.c hck_memory.c hck_pawn.c hck_socket.c hck
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_FILES:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 CLINKS = -L./$(MLX_DIR) -lmlx -lX11 -lXext -lm -lpthread  -I $(INCS_DIR)
 
 $(OBJS_DIR)/%.o : $(SRCS_DIR)/%.c
