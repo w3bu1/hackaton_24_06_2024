@@ -18,12 +18,13 @@ The team is composed of `four members`. We are students at `42 Antananarivo` fol
 
 @**nrabehar** [github profile](https://github.com/nrabehar)
 
-<div style="width: 100%; height: 130px; display: inline-flex; gap: 30px">
-    <img style="border-radius: 50%; width:120px; height: 120px; object-fit: cover" alt="anjrakot" src="blob/anjrakot.jpg">
-    <img style="border-radius: 50%; width:120px; height: 120px; object-fit: cover" alt="hramaros" src="blob/hramaros.jpg">
-    <img style="border-radius: 50%; width:120px; height: 120px; object-fit: cover" alt="nrabarij" src="blob/nrabarij.jpg">
-    <img style="border-radius: 50%; width:120px; height: 120px; object-fit: cover" alt="nrabehar" src="blob/nrabehar.jpg">
+<div>
+    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover; margin-right: 30px;" alt="anjrakot" src="blob/anjrakot.jpg">
+    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover; margin-right: 30px;" alt="hramaros" src="blob/hramaros.jpg">
+    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover; margin-right: 30px;" alt="nrabarij" src="blob/nrabarij.jpg">
+    <img style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover;" alt="nrabehar" src="blob/nrabehar.jpg">
 </div>
+
 
 ## Project Overview
 
