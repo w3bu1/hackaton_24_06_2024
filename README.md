@@ -32,7 +32,7 @@ For our part, we decided to code our popular Malagasy game called `Fanorona`.
 
 The game consists of ***two players***, opposing each other.
 
-### Strategy
+#### <u>Strategy</u>
 
 The game is played on a board of `3x3`, `5x5` or `9x5`. Represented as `[column]x[lines]`.
 
@@ -45,13 +45,13 @@ There are two kinds of moves:
 - A **non-capturing move**, which is called a `paika`.
 - And a **capturing move**.
 
-### End conditions
+#### <u>End conditions</u>
 
 If one player captures all opponent's stones, the game `ends` and the player `wins`.
 
 Or, if neither player can achieve this, the game ends with a `Draw`.
 
-### Challenges
+#### <u>Challenges</u>
 
 We faced the challenge of creating a simple game, yet enjoyable.
 
