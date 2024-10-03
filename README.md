@@ -20,6 +20,10 @@ The team is composed of `four members`. We are students at `42 Antananarivo` fol
 
 ![profiles](https://github.com/w3bu1/blob/blob/main/hackaton_24_06_2024/profiles.png?raw=true)
 
+## Technologies
+
+This program is basically written in `C` and uses the `MinilibX` library as a graphical API. It also utilizes a `Node.js` script for network communication.
+
 ## Project Overview
 
 Because the theme of the hackathon was `Independence day`, all the projects requested had to be related to `Malagasy traditions and customs`.
@@ -27,10 +31,6 @@ Because the theme of the hackathon was `Independence day`, all the projects requ
 For our part, we decided to code our popular Malagasy game called `Fanorona`.
 
 The game consists of ***two players***, opposing each other.
-
-## Technologies
-
-This program is basically written in `C` and uses the `MinilibX` library as a graphical API. It also utilizes a `Node.js` script for network communication.
 
 ### Strategy
 
@@ -51,13 +51,13 @@ If one player captures all opponent's stones, the game `ends` and the player `wi
 
 Or, if neither player can achieve this, the game ends with a `Draw`.
 
-## Challenges
+### Challenges
 
 We faced the challenge of creating a simple game, yet enjoyable.
 
 The real deal is to be able to play the game from `two different computers`, by transmitting player's data through a `server` which will display the board on each client's side.
 
-### Usage
+## Usage
 
 Currently we are working on public deployment in order to make the game enjoyable online.
 
@@ -125,11 +125,11 @@ Enjoy the game 😎
 
 If you want to `close efficiently everything` just close the windows of the players, go to the `first Terminal` (the one that displays broadcast messages) and type `Ctrl + C`.
 
-### License
+## License
 
 TODO
 
-### Acknowledgements
+## Acknowledgements
 
 - **42 Antananarivo**
 - **Axian Group**
@@ -137,5 +137,3 @@ TODO
 - **NextA**
 - **MinilibX**
 - **All Teammates**
-
-[images-of-acknowledges](https://images/blob)
